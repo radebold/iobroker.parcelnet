@@ -59,9 +59,7 @@ class ParcelNet extends utils.Adapter {
     }
 
     private async onReady(): Promise<void> {
-        try {
-            this.log.info("ParcelNet Adapter startet ...");
-            await this.createObjects();
+        await this.createObjects();
         this.subscribeStates("tools.refreshNow");
 
         const previousCountState = await this.getStateAsync("deliveries.count");
@@ -70,19 +68,9 @@ class ParcelNet extends utils.Adapter {
         await this.setStateAsync("info.connection", { val: false, ack: true });
         await this.setStateAsync("tools.refreshNow", { val: false, ack: true });
 
-            this.normalizeConfig();
-            await this.updateDeliveries("startup");
-            this.startPolling();
-            this.log.info("ParcelNet Adapter erfolgreich initialisiert.");
-        } catch (error: any) {
-            const message = error?.stack || error?.message || String(error);
-            this.log.error(`Startfehler im Adapter: ${message}`);
-            try {
-                await this.setStateAsync("info.lastError", { val: String(error?.message || error), ack: true });
-            } catch {
-                // ignore
-            }
-        }
+        this.normalizeConfig();
+        await this.updateDeliveries("startup");
+        this.startPolling();
     }
 
     private onUnload(callback: () => void): void {
@@ -752,8 +740,8 @@ class ParcelNet extends utils.Adapter {
     }
 }
 
-export function startAdapter(options: Partial<utils.AdapterOptions> | undefined = undefined): ParcelNet {
-    return new ParcelNet(options);
+if (require.main !== module) {
+    module.exports = (options: Partial<utils.AdapterOptions> | undefined) => new ParcelNet(options);
+} else {
+    (() => new ParcelNet())();
 }
-
-module.exports = startAdapter;
