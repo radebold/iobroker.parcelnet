@@ -1,7 +1,7 @@
 {
   "common": {
     "name": "parcelnet",
-    "version": "0.6.3-hotfix.2",
+    "version": "0.6.3",
     "news": {
       "0.5.0": {
         "en": "Initial TypeScript adapter version with Parcel API polling, item states, manual refresh and VIS HTML output.",
@@ -32,19 +32,9 @@
         "uk": "Видалено стилізовані значки перевізників, а JSON-стани VIS залишено у стилі Parcel.",
         "zh-cn": "已移除风格化承运商图标，并保留 Parcel 风格的 VIS JSON 状态。"
       },
-      "0.6.2": {
-        "en": "Added ready-to-use VIS HTML with carrier logos and demo carriers when the API returns no active shipments. README expanded.",
-        "de": "Fertiges VIS-HTML mit Carrier-Logos und Demo-Carriern ergänzt, wenn die API keine aktiven Sendungen liefert. README erweitert."
-      },
-      "en": "Hotfix 1 for 0.6.3: optimized VIS content, showing title, additional info and planned delivery date/time.",
-      "de": "Hotfix 1 für 0.6.3: VIS optimiert, zeigt Titel, Zusatzinformationen und geplantes Lieferdatum bzw. Lieferzeit.",
-      "0.6.3-hotfix.1": {
-        "en": "Optimized VIS content to focus on title, additional info and planned delivery date/time.",
-        "de": "VIS-Inhalt optimiert: Fokus auf Titel, Zusatzinfos und geplantes Lieferdatum bzw. Zeitfenster."
-      },
-      "0.6.3-hotfix.2": {
-        "en": "VIS layout uses space better, status code number removed from badges, more Parcel details shown, transparent background, and custom icon paths per carrier added in admin.",
-        "de": "VIS-Layout nutzt den Platz besser, Statuscode-Zahlen wurden aus den Badges entfernt, mehr Parcel-Details werden angezeigt, Hintergrund ist transparent und pro Carrier gibt es eigene Icon-Pfade in der Admin-UI."
+      "0.6.3": {
+        "en": "VIS layout optimized, transparent background, optional demo mode when API is empty, and configurable carrier logos via admin file selection.",
+        "de": "VIS-Layout optimiert, transparenter Hintergrund, optionaler Demo-Modus bei leerer API und konfigurierbare Carrier-Logos per Admin-Dateiauswahl."
       }
     },
     "titleLang": {
@@ -101,15 +91,17 @@
     "maxItemsInHtml": 10,
     "showTrackingNumberInHtml": true,
     "logRawResponse": false,
-    "iconParcel": "",
-    "iconDhl": "",
-    "iconHermes": "",
-    "iconDpd": "",
-    "iconUps": "",
-    "iconAmazon": "",
-    "iconGls": "",
-    "iconDeutschePost": "",
-    "iconFedex": ""
+    "showDemoWhenEmpty": true,
+    "logoFolder": "/vis.0/main/img/parcelnet",
+    "carrierLogo_dhl": "",
+    "carrierLogo_hermes": "",
+    "carrierLogo_dpd": "",
+    "carrierLogo_ups": "",
+    "carrierLogo_amazon": "",
+    "carrierLogo_gls": "",
+    "carrierLogo_deutschepost": "",
+    "carrierLogo_fedex": "",
+    "carrierLogo_parcel": ""
   },
   "objects": [],
   "instanceObjects": [
@@ -126,6 +118,5 @@
       },
       "native": {}
     }
-  ],
-  "version": "0.6.3-hotfix.2"
+  ]
 }

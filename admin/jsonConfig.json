@@ -15,8 +15,8 @@
             "de": "Parcel API-Key"
           },
           "help": {
-            "en": "Create the key at web.parcelapp.net. It is stored as encryptedNative in io-package.json.",
-            "de": "Den Schlüssel erzeugst du unter web.parcelapp.net. Er wird als encryptedNative im io-package.json gespeichert."
+            "en": "Create the key at web.parcelapp.net.",
+            "de": "Den Schlüssel erzeugst du unter web.parcelapp.net."
           },
           "sm": 12,
           "md": 8,
@@ -29,20 +29,8 @@
             "de": "Filtermodus"
           },
           "options": [
-            {
-              "label": {
-                "en": "Active deliveries",
-                "de": "Aktive Lieferungen"
-              },
-              "value": "active"
-            },
-            {
-              "label": {
-                "en": "Recent deliveries",
-                "de": "Letzte Lieferungen"
-              },
-              "value": "recent"
-            }
+            { "label": { "en": "Active deliveries", "de": "Aktive Lieferungen" }, "value": "active" },
+            { "label": { "en": "Recent deliveries", "de": "Letzte Lieferungen" }, "value": "recent" }
           ],
           "sm": 12,
           "md": 4,
@@ -53,10 +41,6 @@
           "label": {
             "en": "Polling interval (minutes)",
             "de": "Polling-Intervall (Minuten)"
-          },
-          "help": {
-            "en": "Parcel documents a rate limit of 20 requests per hour. The adapter enforces a minimum of 3 minutes.",
-            "de": "Parcel dokumentiert ein Limit von 20 Requests pro Stunde. Der Adapter erzwingt daher mindestens 3 Minuten."
           },
           "min": 3,
           "step": 1,
@@ -98,6 +82,20 @@
           "md": 4,
           "lg": 3
         },
+        "showDemoWhenEmpty": {
+          "type": "checkbox",
+          "label": {
+            "en": "Show demo carriers when API returns no deliveries",
+            "de": "Demo-Carrier anzeigen, wenn die API keine Sendungen liefert"
+          },
+          "help": {
+            "en": "Only affects the VIS HTML states. Real delivery states stay empty.",
+            "de": "Betrifft nur die VIS-HTML-States. Echte Liefer-States bleiben leer."
+          },
+          "sm": 12,
+          "md": 8,
+          "lg": 6
+        },
         "logRawResponse": {
           "type": "checkbox",
           "label": {
@@ -110,138 +108,118 @@
         }
       }
     },
-    "iconTab": {
+    "carrierTab": {
       "type": "panel",
       "label": {
-        "en": "Carrier icons",
-        "de": "Carrier-Icons"
+        "en": "Carrier logos",
+        "de": "Carrier-Logos"
       },
       "items": {
-        "iconParcel": {
-          "type": "text",
-          "label": {
-            "en": "Parcel/Fallback icon path/URL",
-            "de": "Parcel/Fallback Icon-Pfad/URL"
-          },
-          "help": {
-            "en": "Optional custom icon path or URL. You can upload your own files via ioBroker file manager and enter the path here.",
-            "de": "Optionaler eigener Icon-Pfad oder URL. Eigene Dateien kannst du über den ioBroker-Dateimanager hochladen und den Pfad hier eintragen."
+        "logoInfo": {
+          "type": "staticText",
+          "text": {
+            "en": "Upload your own logo files in the selected folder and choose them per carrier below. The adapter uses the selected file path directly in the VIS HTML.",
+            "de": "Lade deine eigenen Logo-Dateien in den gewählten Ordner hoch und wähle sie unten pro Carrier aus. Der Adapter nutzt den ausgewählten Dateipfad direkt im VIS-HTML."
           },
           "sm": 12,
-          "md": 6,
+          "md": 12,
+          "lg": 12
+        },
+        "logoFolder": {
+          "type": "text",
+          "label": {
+            "en": "Logo folder",
+            "de": "Logo-Ordner"
+          },
+          "help": {
+            "en": "Example: /vis.0/main/img/parcelnet",
+            "de": "Beispiel: /vis.0/main/img/parcelnet"
+          },
+          "sm": 12,
+          "md": 8,
           "lg": 6
         },
-        "iconDhl": {
-          "type": "text",
-          "label": {
-            "en": "DHL icon path/URL",
-            "de": "DHL Icon-Pfad/URL"
-          },
-          "help": {
-            "en": "Optional custom icon path or URL. You can upload your own files via ioBroker file manager and enter the path here.",
-            "de": "Optionaler eigener Icon-Pfad oder URL. Eigene Dateien kannst du über den ioBroker-Dateimanager hochladen und den Pfad hier eintragen."
-          },
-          "sm": 12,
-          "md": 6,
-          "lg": 6
+        "carrierLogo_parcel": {
+          "type": "fileSelector",
+          "label": { "en": "Default / fallback logo", "de": "Standard-/Fallback-Logo" },
+          "sm": 12, "md": 6, "lg": 4,
+          "root": "dataFiles",
+          "folder": "data:vis.0/main/img/parcelnet",
+          "allowUpload": true,
+          "allowCreateFolder": true,
+          "pattern": "(?i).+\\.(png|svg|jpg|jpeg|webp)$"
         },
-        "iconHermes": {
-          "type": "text",
-          "label": {
-            "en": "Hermes icon path/URL",
-            "de": "Hermes Icon-Pfad/URL"
-          },
-          "help": {
-            "en": "Optional custom icon path or URL. You can upload your own files via ioBroker file manager and enter the path here.",
-            "de": "Optionaler eigener Icon-Pfad oder URL. Eigene Dateien kannst du über den ioBroker-Dateimanager hochladen und den Pfad hier eintragen."
-          },
-          "sm": 12,
-          "md": 6,
-          "lg": 6
+        "carrierLogo_dhl": {
+          "type": "fileSelector",
+          "label": { "en": "DHL logo", "de": "DHL-Logo" },
+          "sm": 12, "md": 6, "lg": 4,
+          "root": "dataFiles",
+          "folder": "data:vis.0/main/img/parcelnet",
+          "allowUpload": true,
+          "pattern": "(?i).+\\.(png|svg|jpg|jpeg|webp)$"
         },
-        "iconDpd": {
-          "type": "text",
-          "label": {
-            "en": "DPD icon path/URL",
-            "de": "DPD Icon-Pfad/URL"
-          },
-          "help": {
-            "en": "Optional custom icon path or URL. You can upload your own files via ioBroker file manager and enter the path here.",
-            "de": "Optionaler eigener Icon-Pfad oder URL. Eigene Dateien kannst du über den ioBroker-Dateimanager hochladen und den Pfad hier eintragen."
-          },
-          "sm": 12,
-          "md": 6,
-          "lg": 6
+        "carrierLogo_hermes": {
+          "type": "fileSelector",
+          "label": { "en": "Hermes logo", "de": "Hermes-Logo" },
+          "sm": 12, "md": 6, "lg": 4,
+          "root": "dataFiles",
+          "folder": "data:vis.0/main/img/parcelnet",
+          "allowUpload": true,
+          "pattern": "(?i).+\\.(png|svg|jpg|jpeg|webp)$"
         },
-        "iconUps": {
-          "type": "text",
-          "label": {
-            "en": "UPS icon path/URL",
-            "de": "UPS Icon-Pfad/URL"
-          },
-          "help": {
-            "en": "Optional custom icon path or URL. You can upload your own files via ioBroker file manager and enter the path here.",
-            "de": "Optionaler eigener Icon-Pfad oder URL. Eigene Dateien kannst du über den ioBroker-Dateimanager hochladen und den Pfad hier eintragen."
-          },
-          "sm": 12,
-          "md": 6,
-          "lg": 6
+        "carrierLogo_dpd": {
+          "type": "fileSelector",
+          "label": { "en": "DPD logo", "de": "DPD-Logo" },
+          "sm": 12, "md": 6, "lg": 4,
+          "root": "dataFiles",
+          "folder": "data:vis.0/main/img/parcelnet",
+          "allowUpload": true,
+          "pattern": "(?i).+\\.(png|svg|jpg|jpeg|webp)$"
         },
-        "iconAmazon": {
-          "type": "text",
-          "label": {
-            "en": "Amazon icon path/URL",
-            "de": "Amazon Icon-Pfad/URL"
-          },
-          "help": {
-            "en": "Optional custom icon path or URL. You can upload your own files via ioBroker file manager and enter the path here.",
-            "de": "Optionaler eigener Icon-Pfad oder URL. Eigene Dateien kannst du über den ioBroker-Dateimanager hochladen und den Pfad hier eintragen."
-          },
-          "sm": 12,
-          "md": 6,
-          "lg": 6
+        "carrierLogo_ups": {
+          "type": "fileSelector",
+          "label": { "en": "UPS logo", "de": "UPS-Logo" },
+          "sm": 12, "md": 6, "lg": 4,
+          "root": "dataFiles",
+          "folder": "data:vis.0/main/img/parcelnet",
+          "allowUpload": true,
+          "pattern": "(?i).+\\.(png|svg|jpg|jpeg|webp)$"
         },
-        "iconGls": {
-          "type": "text",
-          "label": {
-            "en": "GLS icon path/URL",
-            "de": "GLS Icon-Pfad/URL"
-          },
-          "help": {
-            "en": "Optional custom icon path or URL. You can upload your own files via ioBroker file manager and enter the path here.",
-            "de": "Optionaler eigener Icon-Pfad oder URL. Eigene Dateien kannst du über den ioBroker-Dateimanager hochladen und den Pfad hier eintragen."
-          },
-          "sm": 12,
-          "md": 6,
-          "lg": 6
+        "carrierLogo_amazon": {
+          "type": "fileSelector",
+          "label": { "en": "Amazon logo", "de": "Amazon-Logo" },
+          "sm": 12, "md": 6, "lg": 4,
+          "root": "dataFiles",
+          "folder": "data:vis.0/main/img/parcelnet",
+          "allowUpload": true,
+          "pattern": "(?i).+\\.(png|svg|jpg|jpeg|webp)$"
         },
-        "iconDeutschePost": {
-          "type": "text",
-          "label": {
-            "en": "Deutsche Post icon path/URL",
-            "de": "Deutsche Post Icon-Pfad/URL"
-          },
-          "help": {
-            "en": "Optional custom icon path or URL. You can upload your own files via ioBroker file manager and enter the path here.",
-            "de": "Optionaler eigener Icon-Pfad oder URL. Eigene Dateien kannst du über den ioBroker-Dateimanager hochladen und den Pfad hier eintragen."
-          },
-          "sm": 12,
-          "md": 6,
-          "lg": 6
+        "carrierLogo_gls": {
+          "type": "fileSelector",
+          "label": { "en": "GLS logo", "de": "GLS-Logo" },
+          "sm": 12, "md": 6, "lg": 4,
+          "root": "dataFiles",
+          "folder": "data:vis.0/main/img/parcelnet",
+          "allowUpload": true,
+          "pattern": "(?i).+\\.(png|svg|jpg|jpeg|webp)$"
         },
-        "iconFedex": {
-          "type": "text",
-          "label": {
-            "en": "FedEx icon path/URL",
-            "de": "FedEx Icon-Pfad/URL"
-          },
-          "help": {
-            "en": "Optional custom icon path or URL. You can upload your own files via ioBroker file manager and enter the path here.",
-            "de": "Optionaler eigener Icon-Pfad oder URL. Eigene Dateien kannst du über den ioBroker-Dateimanager hochladen und den Pfad hier eintragen."
-          },
-          "sm": 12,
-          "md": 6,
-          "lg": 6
+        "carrierLogo_deutschepost": {
+          "type": "fileSelector",
+          "label": { "en": "Deutsche Post logo", "de": "Deutsche-Post-Logo" },
+          "sm": 12, "md": 6, "lg": 4,
+          "root": "dataFiles",
+          "folder": "data:vis.0/main/img/parcelnet",
+          "allowUpload": true,
+          "pattern": "(?i).+\\.(png|svg|jpg|jpeg|webp)$"
+        },
+        "carrierLogo_fedex": {
+          "type": "fileSelector",
+          "label": { "en": "FedEx logo", "de": "FedEx-Logo" },
+          "sm": 12, "md": 6, "lg": 4,
+          "root": "dataFiles",
+          "folder": "data:vis.0/main/img/parcelnet",
+          "allowUpload": true,
+          "pattern": "(?i).+\\.(png|svg|jpg|jpeg|webp)$"
         }
       }
     }
