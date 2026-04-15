@@ -174,3 +174,12 @@ Die TypeScript-Quellen liegen unter `src/`, die kompilierten Dateien unter `buil
 ## Lizenz
 
 MIT
+
+
+## Changelog
+
+### 0.6.3
+- VIS-HTML kompakter gestaltet
+- Scrollbalken in der HTML-Ansicht ergänzt
+- Carrier-Icons größer dargestellt
+- weiße Kachel hinter den Icons entfernt, damit der transparente Hintergrund sichtbar bleibt

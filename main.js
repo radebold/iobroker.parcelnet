@@ -729,11 +729,14 @@ class ParcelNet extends utils.Adapter {
         const showTracking = Boolean(this.config.showTrackingNumberInHtml);
         const useDummies = deliveries.length === 0;
         const items = (useDummies ? this.getDummyDeliveries() : deliveries).slice(0, maxItems);
-        const cardPadding = compact ? "8px 10px" : "12px 14px";
-        const titleSize = compact ? "14px" : "16px";
-        const textSize = compact ? "11px" : "13px";
-        const gap = compact ? "8px" : "10px";
-        const iconSize = compact ? 26 : 30;
+        const containerPadding = compact ? "8px" : "10px";
+        const cardPadding = compact ? "8px 10px" : "10px 12px";
+        const titleSize = compact ? "13px" : "15px";
+        const textSize = compact ? "11px" : "12px";
+        const metaSize = compact ? "10px" : "11px";
+        const gap = compact ? "6px" : "8px";
+        const iconSize = compact ? 34 : 42;
+        const badgePad = compact ? "3px 8px" : "4px 10px";
         const rows = items.map((delivery) => {
             const latestEvent = this.getLatestEvent(delivery);
             const statusCode = typeof delivery.status_code === "number" ? delivery.status_code : -1;
@@ -742,24 +745,26 @@ class ParcelNet extends utils.Adapter {
             const badgeColor = this.statusColor(statusCode);
             const carrier = this.getCarrierMeta(delivery);
             return `
-<div style="padding:${cardPadding};border-radius:14px;background:#1f2937;color:#fff;border:1px solid rgba(255,255,255,.08);box-shadow:0 2px 10px rgba(0,0,0,.15);">
-  <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px;">
-    <div style="display:flex;align-items:flex-start;gap:10px;min-width:0;flex:1;">
-      <div style="width:${iconSize}px;height:${iconSize}px;min-width:${iconSize}px;display:flex;align-items:center;justify-content:center;background:#fff;border-radius:8px;padding:3px;overflow:hidden;">
-        <img src="${this.escapeHtml(carrier.icon)}" alt="${this.escapeHtml(carrier.name)}" style="max-width:100%;max-height:100%;display:block;" />
+<div style="padding:${cardPadding};border-radius:12px;background:#1f2937;color:#fff;border:1px solid rgba(255,255,255,.08);box-shadow:0 2px 8px rgba(0,0,0,.14);">
+  <div style="display:flex;align-items:flex-start;gap:${gap};min-width:0;">
+    <div style="width:${iconSize}px;height:${iconSize}px;min-width:${iconSize}px;display:flex;align-items:center;justify-content:center;overflow:hidden;flex:none;">
+      <img src="${this.escapeHtml(carrier.icon)}" alt="${this.escapeHtml(carrier.name)}" style="width:100%;height:100%;object-fit:contain;display:block;background:transparent;" />
+    </div>
+    <div style="min-width:0;flex:1;">
+      <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:${gap};min-width:0;">
+        <div style="min-width:0;flex:1;">
+          <div style="font-size:${titleSize};font-weight:700;line-height:1.25;word-break:break-word;">${this.escapeHtml(String(delivery.description || "Unbenannte Lieferung"))}</div>
+          <div style="margin-top:1px;font-size:${textSize};opacity:.82;line-height:1.2;">${this.escapeHtml(carrier.name)}</div>
+        </div>
+        <div style="font-size:${metaSize};padding:${badgePad};border-radius:999px;background:${badgeColor};white-space:nowrap;line-height:1;">${this.escapeHtml(statusText)}</div>
       </div>
-      <div style="min-width:0;flex:1;">
-        <div style="font-size:${titleSize};font-weight:700;line-height:1.3;word-break:break-word;">${this.escapeHtml(String(delivery.description || "Unbenannte Lieferung"))}</div>
-        <div style="margin-top:2px;font-size:${textSize};opacity:.78;">${this.escapeHtml(carrier.name)}</div>
+      <div style="margin-top:6px;display:grid;gap:2px;font-size:${textSize};line-height:1.28;opacity:.94;">
+        ${showTracking ? `<div>Tracking: <b>${this.escapeHtml(String(delivery.tracking_number || "-"))}</b></div>` : ""}
+        ${eta ? `<div>ETA: <b>${this.escapeHtml(eta)}</b></div>` : ""}
+        ${latestEvent?.event ? `<div>Event: <b>${this.escapeHtml(latestEvent.event)}</b></div>` : ""}
+        ${latestEvent?.location ? `<div>Ort: <b>${this.escapeHtml(latestEvent.location)}</b></div>` : ""}
       </div>
     </div>
-    <div style="font-size:${textSize};padding:3px 8px;border-radius:999px;background:${badgeColor};white-space:nowrap;">${this.escapeHtml(statusText)}</div>
-  </div>
-  <div style="margin-top:6px;font-size:${textSize};opacity:.92;line-height:1.45;">
-    ${showTracking ? `<div>Tracking: <b>${this.escapeHtml(String(delivery.tracking_number || "-"))}</b></div>` : ""}
-    ${eta ? `<div>ETA: <b>${this.escapeHtml(eta)}</b></div>` : ""}
-    ${latestEvent?.event ? `<div>Letztes Event: <b>${this.escapeHtml(latestEvent.event)}</b></div>` : ""}
-    ${latestEvent?.location ? `<div>Ort: <b>${this.escapeHtml(latestEvent.location)}</b></div>` : ""}
   </div>
 </div>`;
         }).join("");
@@ -767,16 +772,16 @@ class ParcelNet extends utils.Adapter {
             ? `Keine aktiven Sendungen • Demoansicht mit ${items.length} Carriern`
             : `${deliveries.length} aktiv`;
         const infoBanner = useDummies
-            ? `<div style="margin-bottom:${gap};padding:${compact ? "8px 10px" : "10px 12px"};border-radius:12px;background:#0f172a;border:1px solid rgba(255,255,255,.08);font-size:${textSize};opacity:.92;">Aktuell liefert die Parcel-API keine Sendungen. Zur VIS-Vorschau werden Demo-Carrier eingeblendet.</div>`
+            ? `<div style="margin-bottom:${gap};padding:${compact ? "6px 8px" : "8px 10px"};border-radius:10px;background:#0f172a;border:1px solid rgba(255,255,255,.08);font-size:${textSize};opacity:.92;line-height:1.25;">Aktuell liefert die Parcel-API keine Sendungen. Zur VIS-Vorschau werden Demo-Carrier eingeblendet.</div>`
             : "";
         return `
-<div style="font-family:Arial,sans-serif;background:#111827;color:#fff;padding:${compact ? "10px" : "14px"};border-radius:16px;">
-  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:${gap};gap:8px;">
-    <div style="font-size:${compact ? "16px" : "18px"};font-weight:700;">Parcel Lieferungen</div>
-    <div style="font-size:${textSize};opacity:.8;">${this.escapeHtml(subtitle)}</div>
+<div style="font-family:Arial,sans-serif;background:#111827;color:#fff;padding:${containerPadding};border-radius:14px;box-sizing:border-box;height:100%;min-height:100%;overflow-y:auto;overflow-x:hidden;scrollbar-width:thin;">
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:${gap};gap:${gap};position:sticky;top:0;background:#111827;padding-bottom:${gap};z-index:2;">
+    <div style="font-size:${compact ? "15px" : "17px"};font-weight:700;line-height:1.1;">Parcel Lieferungen</div>
+    <div style="font-size:${metaSize};opacity:.82;text-align:right;">${this.escapeHtml(subtitle)}</div>
   </div>
   ${infoBanner}
-  <div style="display:grid;gap:${gap};">
+  <div style="display:grid;gap:${gap};padding-right:2px;">
     ${rows}
   </div>
 </div>`.trim();
