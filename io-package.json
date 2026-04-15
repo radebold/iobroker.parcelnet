@@ -1,7 +1,7 @@
 {
   "common": {
     "name": "parcelnet",
-    "version": "0.6.3",
+    "version": "0.6.3-hotfix.1",
     "news": {
       "0.5.0": {
         "en": "Initial TypeScript adapter version with Parcel API polling, item states, manual refresh and VIS HTML output.",
@@ -35,7 +35,9 @@
       "0.6.2": {
         "en": "Added ready-to-use VIS HTML with carrier logos and demo carriers when the API returns no active shipments. README expanded.",
         "de": "Fertiges VIS-HTML mit Carrier-Logos und Demo-Carriern ergänzt, wenn die API keine aktiven Sendungen liefert. README erweitert."
-      }
+      },
+      "en": "Hotfix 1 for 0.6.3: optimized VIS content, showing title, additional info and planned delivery date/time.",
+      "de": "Hotfix 1 für 0.6.3: VIS optimiert, zeigt Titel, Zusatzinformationen und geplantes Lieferdatum bzw. Lieferzeit."
     },
     "titleLang": {
       "en": "ParcelNet",
@@ -107,5 +109,6 @@
       },
       "native": {}
     }
-  ]
+  ],
+  "version": "0.6.3-hotfix.1"
 }

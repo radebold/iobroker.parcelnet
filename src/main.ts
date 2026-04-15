@@ -844,14 +844,14 @@ class ParcelNet extends utils.Adapter {
 
     private getDummyDeliveries(): ParcelDelivery[] {
         return [
-            { carrier_code: "dhl", description: "Demo DHL Sendung", status_code: 2, tracking_number: "DHL-DEMO-001", date_expected: "", events: [{ event: "Demoansicht aktiv", date: new Date().toISOString(), location: "ParcelNet" }] },
-            { carrier_code: "hermes", description: "Demo Hermes Sendung", status_code: 4, tracking_number: "HERMES-DEMO-001", date_expected: "", events: [{ event: "Demoansicht aktiv", date: new Date().toISOString(), location: "ParcelNet" }] },
-            { carrier_code: "dpd", description: "Demo DPD Sendung", status_code: 3, tracking_number: "DPD-DEMO-001", date_expected: "", events: [{ event: "Demoansicht aktiv", date: new Date().toISOString(), location: "ParcelNet" }] },
-            { carrier_code: "ups", description: "Demo UPS Sendung", status_code: 2, tracking_number: "UPS-DEMO-001", date_expected: "", events: [{ event: "Demoansicht aktiv", date: new Date().toISOString(), location: "ParcelNet" }] },
-            { carrier_code: "amazon", description: "Demo Amazon Sendung", status_code: 4, tracking_number: "AMZ-DEMO-001", date_expected: "", events: [{ event: "Demoansicht aktiv", date: new Date().toISOString(), location: "ParcelNet" }] },
-            { carrier_code: "gls", description: "Demo GLS Sendung", status_code: 2, tracking_number: "GLS-DEMO-001", date_expected: "", events: [{ event: "Demoansicht aktiv", date: new Date().toISOString(), location: "ParcelNet" }] },
-            { carrier_code: "deutschepost", description: "Demo Deutsche Post Sendung", status_code: 8, tracking_number: "POST-DEMO-001", date_expected: "", events: [{ event: "Demoansicht aktiv", date: new Date().toISOString(), location: "ParcelNet" }] },
-            { carrier_code: "fedex", description: "Demo FedEx Sendung", status_code: 2, tracking_number: "FEDEX-DEMO-001", date_expected: "", events: [{ event: "Demoansicht aktiv", date: new Date().toISOString(), location: "ParcelNet" }] },
+            { carrier_code: "dhl", description: "Demo DHL Sendung", status_code: 2, tracking_number: "DHL-DEMO-001", date_expected: new Date(Date.now() + 86400000).toISOString(), events: [{ event: "Demoansicht aktiv", date: new Date().toISOString(), additional: "Voraussichtliche Zustellung morgen zwischen 10:00 und 14:00 Uhr" }] },
+            { carrier_code: "hermes", description: "Demo Hermes Sendung", status_code: 4, tracking_number: "HERMES-DEMO-001", date_expected: new Date(Date.now() + 3600000 * 6).toISOString(), events: [{ event: "Demoansicht aktiv", date: new Date().toISOString(), additional: "Zustellung heute 14:00–18:00 Uhr" }] },
+            { carrier_code: "dpd", description: "Demo DPD Sendung", status_code: 3, tracking_number: "DPD-DEMO-001", date_expected: new Date(Date.now() + 86400000 * 2).toISOString(), events: [{ event: "Demoansicht aktiv", date: new Date().toISOString(), additional: "Ab morgen im Pickup Paketshop" }] },
+            { carrier_code: "ups", description: "Demo UPS Sendung", status_code: 2, tracking_number: "UPS-DEMO-001", date_expected: new Date(Date.now() + 86400000).toISOString(), events: [{ event: "Demoansicht aktiv", date: new Date().toISOString(), additional: "Geplante Lieferung bis 12:00 Uhr" }] },
+            { carrier_code: "amazon", description: "Demo Amazon Sendung", status_code: 4, tracking_number: "AMZ-DEMO-001", date_expected: new Date(Date.now() + 3600000 * 3).toISOString(), events: [{ event: "Demoansicht aktiv", date: new Date().toISOString(), additional: "Noch 3 Stopps entfernt" }] },
+            { carrier_code: "gls", description: "Demo GLS Sendung", status_code: 2, tracking_number: "GLS-DEMO-001", date_expected: new Date(Date.now() + 86400000 * 3).toISOString(), events: [{ event: "Demoansicht aktiv", date: new Date().toISOString(), additional: "Lieferung in 2–3 Werktagen" }] },
+            { carrier_code: "deutschepost", description: "Demo Deutsche Post Sendung", status_code: 8, tracking_number: "POST-DEMO-001", date_expected: new Date(Date.now() + 86400000).toISOString(), events: [{ event: "Demoansicht aktiv", date: new Date().toISOString(), additional: "Sendung elektronisch angekündigt" }] },
+            { carrier_code: "fedex", description: "Demo FedEx Sendung", status_code: 2, tracking_number: "FEDEX-DEMO-001", date_expected: new Date(Date.now() + 86400000 * 4).toISOString(), events: [{ event: "Demoansicht aktiv", date: new Date().toISOString(), additional: "Internationaler Versand" }] },
         ];
     }
 
@@ -895,8 +895,8 @@ class ParcelNet extends utils.Adapter {
       <div style="margin-top:6px;display:grid;gap:2px;font-size:${textSize};line-height:1.28;opacity:.94;">
         ${showTracking ? `<div>Tracking: <b>${this.escapeHtml(String(delivery.tracking_number || "-"))}</b></div>` : ""}
         ${eta ? `<div>ETA: <b>${this.escapeHtml(eta)}</b></div>` : ""}
-        ${latestEvent?.event ? `<div>Event: <b>${this.escapeHtml(latestEvent.event)}</b></div>` : ""}
-        ${latestEvent?.location ? `<div>Ort: <b>${this.escapeHtml(latestEvent.location)}</b></div>` : ""}
+        ${latestEvent?.additional ? `<div>Info: <b>${this.escapeHtml(latestEvent.additional)}</b></div>` : ""}
+        ${eta ? `<div>Geplante Lieferung: <b>${this.escapeHtml(eta)}</b></div>` : ""}
       </div>
     </div>
   </div>
