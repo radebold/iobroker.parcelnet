@@ -109,6 +109,141 @@
           "lg": 3
         }
       }
+    },
+    "iconTab": {
+      "type": "panel",
+      "label": {
+        "en": "Carrier icons",
+        "de": "Carrier-Icons"
+      },
+      "items": {
+        "iconParcel": {
+          "type": "text",
+          "label": {
+            "en": "Parcel/Fallback icon path/URL",
+            "de": "Parcel/Fallback Icon-Pfad/URL"
+          },
+          "help": {
+            "en": "Optional custom icon path or URL. You can upload your own files via ioBroker file manager and enter the path here.",
+            "de": "Optionaler eigener Icon-Pfad oder URL. Eigene Dateien kannst du über den ioBroker-Dateimanager hochladen und den Pfad hier eintragen."
+          },
+          "sm": 12,
+          "md": 6,
+          "lg": 6
+        },
+        "iconDhl": {
+          "type": "text",
+          "label": {
+            "en": "DHL icon path/URL",
+            "de": "DHL Icon-Pfad/URL"
+          },
+          "help": {
+            "en": "Optional custom icon path or URL. You can upload your own files via ioBroker file manager and enter the path here.",
+            "de": "Optionaler eigener Icon-Pfad oder URL. Eigene Dateien kannst du über den ioBroker-Dateimanager hochladen und den Pfad hier eintragen."
+          },
+          "sm": 12,
+          "md": 6,
+          "lg": 6
+        },
+        "iconHermes": {
+          "type": "text",
+          "label": {
+            "en": "Hermes icon path/URL",
+            "de": "Hermes Icon-Pfad/URL"
+          },
+          "help": {
+            "en": "Optional custom icon path or URL. You can upload your own files via ioBroker file manager and enter the path here.",
+            "de": "Optionaler eigener Icon-Pfad oder URL. Eigene Dateien kannst du über den ioBroker-Dateimanager hochladen und den Pfad hier eintragen."
+          },
+          "sm": 12,
+          "md": 6,
+          "lg": 6
+        },
+        "iconDpd": {
+          "type": "text",
+          "label": {
+            "en": "DPD icon path/URL",
+            "de": "DPD Icon-Pfad/URL"
+          },
+          "help": {
+            "en": "Optional custom icon path or URL. You can upload your own files via ioBroker file manager and enter the path here.",
+            "de": "Optionaler eigener Icon-Pfad oder URL. Eigene Dateien kannst du über den ioBroker-Dateimanager hochladen und den Pfad hier eintragen."
+          },
+          "sm": 12,
+          "md": 6,
+          "lg": 6
+        },
+        "iconUps": {
+          "type": "text",
+          "label": {
+            "en": "UPS icon path/URL",
+            "de": "UPS Icon-Pfad/URL"
+          },
+          "help": {
+            "en": "Optional custom icon path or URL. You can upload your own files via ioBroker file manager and enter the path here.",
+            "de": "Optionaler eigener Icon-Pfad oder URL. Eigene Dateien kannst du über den ioBroker-Dateimanager hochladen und den Pfad hier eintragen."
+          },
+          "sm": 12,
+          "md": 6,
+          "lg": 6
+        },
+        "iconAmazon": {
+          "type": "text",
+          "label": {
+            "en": "Amazon icon path/URL",
+            "de": "Amazon Icon-Pfad/URL"
+          },
+          "help": {
+            "en": "Optional custom icon path or URL. You can upload your own files via ioBroker file manager and enter the path here.",
+            "de": "Optionaler eigener Icon-Pfad oder URL. Eigene Dateien kannst du über den ioBroker-Dateimanager hochladen und den Pfad hier eintragen."
+          },
+          "sm": 12,
+          "md": 6,
+          "lg": 6
+        },
+        "iconGls": {
+          "type": "text",
+          "label": {
+            "en": "GLS icon path/URL",
+            "de": "GLS Icon-Pfad/URL"
+          },
+          "help": {
+            "en": "Optional custom icon path or URL. You can upload your own files via ioBroker file manager and enter the path here.",
+            "de": "Optionaler eigener Icon-Pfad oder URL. Eigene Dateien kannst du über den ioBroker-Dateimanager hochladen und den Pfad hier eintragen."
+          },
+          "sm": 12,
+          "md": 6,
+          "lg": 6
+        },
+        "iconDeutschePost": {
+          "type": "text",
+          "label": {
+            "en": "Deutsche Post icon path/URL",
+            "de": "Deutsche Post Icon-Pfad/URL"
+          },
+          "help": {
+            "en": "Optional custom icon path or URL. You can upload your own files via ioBroker file manager and enter the path here.",
+            "de": "Optionaler eigener Icon-Pfad oder URL. Eigene Dateien kannst du über den ioBroker-Dateimanager hochladen und den Pfad hier eintragen."
+          },
+          "sm": 12,
+          "md": 6,
+          "lg": 6
+        },
+        "iconFedex": {
+          "type": "text",
+          "label": {
+            "en": "FedEx icon path/URL",
+            "de": "FedEx Icon-Pfad/URL"
+          },
+          "help": {
+            "en": "Optional custom icon path or URL. You can upload your own files via ioBroker file manager and enter the path here.",
+            "de": "Optionaler eigener Icon-Pfad oder URL. Eigene Dateien kannst du über den ioBroker-Dateimanager hochladen und den Pfad hier eintragen."
+          },
+          "sm": 12,
+          "md": 6,
+          "lg": 6
+        }
+      }
     }
   }
 }

@@ -1,7 +1,7 @@
 {
   "common": {
     "name": "parcelnet",
-    "version": "0.6.3-hotfix.1",
+    "version": "0.6.3-hotfix.2",
     "news": {
       "0.5.0": {
         "en": "Initial TypeScript adapter version with Parcel API polling, item states, manual refresh and VIS HTML output.",
@@ -37,7 +37,15 @@
         "de": "Fertiges VIS-HTML mit Carrier-Logos und Demo-Carriern ergänzt, wenn die API keine aktiven Sendungen liefert. README erweitert."
       },
       "en": "Hotfix 1 for 0.6.3: optimized VIS content, showing title, additional info and planned delivery date/time.",
-      "de": "Hotfix 1 für 0.6.3: VIS optimiert, zeigt Titel, Zusatzinformationen und geplantes Lieferdatum bzw. Lieferzeit."
+      "de": "Hotfix 1 für 0.6.3: VIS optimiert, zeigt Titel, Zusatzinformationen und geplantes Lieferdatum bzw. Lieferzeit.",
+      "0.6.3-hotfix.1": {
+        "en": "Optimized VIS content to focus on title, additional info and planned delivery date/time.",
+        "de": "VIS-Inhalt optimiert: Fokus auf Titel, Zusatzinfos und geplantes Lieferdatum bzw. Zeitfenster."
+      },
+      "0.6.3-hotfix.2": {
+        "en": "VIS layout uses space better, status code number removed from badges, more Parcel details shown, transparent background, and custom icon paths per carrier added in admin.",
+        "de": "VIS-Layout nutzt den Platz besser, Statuscode-Zahlen wurden aus den Badges entfernt, mehr Parcel-Details werden angezeigt, Hintergrund ist transparent und pro Carrier gibt es eigene Icon-Pfade in der Admin-UI."
+      }
     },
     "titleLang": {
       "en": "ParcelNet",
@@ -92,7 +100,16 @@
     "requestTimeoutMs": 15000,
     "maxItemsInHtml": 10,
     "showTrackingNumberInHtml": true,
-    "logRawResponse": false
+    "logRawResponse": false,
+    "iconParcel": "",
+    "iconDhl": "",
+    "iconHermes": "",
+    "iconDpd": "",
+    "iconUps": "",
+    "iconAmazon": "",
+    "iconGls": "",
+    "iconDeutschePost": "",
+    "iconFedex": ""
   },
   "objects": [],
   "instanceObjects": [
@@ -110,5 +127,5 @@
       "native": {}
     }
   ],
-  "version": "0.6.3-hotfix.1"
+  "version": "0.6.3-hotfix.2"
 }

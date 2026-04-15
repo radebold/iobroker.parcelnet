@@ -183,3 +183,29 @@ MIT
 - Scrollbalken in der HTML-Ansicht ergänzt
 - Carrier-Icons größer dargestellt
 - weiße Kachel hinter den Icons entfernt, damit der transparente Hintergrund sichtbar bleibt
+
+
+## VIS HTML
+
+Für VIS stehen die States `parcelnet.0.vis.html` und `parcelnet.0.vis.htmlCompact` bereit.
+
+Die HTML-Ansicht zeigt:
+- Titel / Beschreibung
+- Carrier
+- Status
+- geplante Lieferung bzw. Lieferfenster
+- Zusatzinformationen des Carriers
+- optional die Trackingnummer
+
+Die farbigen Status-Badges zeigen nur noch den Statusnamen. Der numerische Parcel-Statuscode bleibt in den States erhalten, wird aber in der VIS nicht mehr eingeblendet.
+
+## Eigene Carrier-Icons
+
+Im Admin gibt es unter **Carrier-Icons** pro bekannten Carrier ein Feld für einen eigenen Pfad oder eine URL. Damit können eigene Logos verwendet werden.
+
+Beispiele:
+- `/vis.0/main/img/dhl.png`
+- `files/vis-2/main/img/hermes.svg`
+- `https://example.com/mylogo.png`
+
+Leer gelassene Felder verwenden die mitgelieferten Standard-Icons.

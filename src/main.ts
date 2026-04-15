@@ -556,6 +556,22 @@ class ParcelNet extends utils.Adapter {
         return CARRIER_ALIASES[normalized] || normalized;
     }
 
+    private getConfiguredCarrierIcon(key: string, fallback: string): string {
+        const map: Record<string, string> = {
+            dhl: String(this.config.iconDhl || "").trim(),
+            hermes: String(this.config.iconHermes || "").trim(),
+            dpd: String(this.config.iconDpd || "").trim(),
+            ups: String(this.config.iconUps || "").trim(),
+            amazon: String(this.config.iconAmazon || "").trim(),
+            gls: String(this.config.iconGls || "").trim(),
+            deutschepost: String(this.config.iconDeutschePost || "").trim(),
+            fedex: String(this.config.iconFedex || "").trim(),
+            parcel: String(this.config.iconParcel || "").trim(),
+        };
+
+        return map[key] || fallback;
+    }
+
     private getCarrierMeta(delivery: ParcelDelivery): CarrierMeta {
         const candidates = [
             delivery?.carrier_code,
@@ -568,11 +584,13 @@ class ParcelNet extends utils.Adapter {
         for (const candidate of candidates) {
             const key = this.normalizeCarrierKey(candidate);
             if (key && CARRIER_META[key]) {
-                return CARRIER_META[key];
+                const meta = CARRIER_META[key];
+                return { ...meta, icon: this.getConfiguredCarrierIcon(meta.key, meta.icon) };
             }
         }
 
-        return CARRIER_META.parcel;
+        const meta = CARRIER_META.parcel;
+        return { ...meta, icon: this.getConfiguredCarrierIcon(meta.key, meta.icon) };
     }
 
     private buildJsonRows(deliveries: ParcelDelivery[]): JsonRow[] {
@@ -611,7 +629,6 @@ class ParcelNet extends utils.Adapter {
     }
 
     private formatDelivery(delivery: ParcelDelivery): string {
-        const latestEvent = this.getLatestEvent(delivery);
         const parts: string[] = [];
 
         if (delivery.description) {
@@ -631,17 +648,14 @@ class ParcelNet extends utils.Adapter {
             parts.push(`Tracking: ${delivery.tracking_number}`);
         }
 
-        const eta = this.formatEta(delivery);
-        if (eta) {
-            parts.push(`ETA: ${eta}`);
+        const planned = this.formatExpectedWindow(delivery);
+        if (planned) {
+            parts.push(`Geplant: ${planned}`);
         }
 
-        if (latestEvent?.event) {
-            parts.push(`Event: ${latestEvent.event}`);
-        }
-
-        if (latestEvent?.location) {
-            parts.push(`Ort: ${latestEvent.location}`);
+        const additional = this.getAdditionalInfo(delivery);
+        if (additional) {
+            parts.push(`Info: ${additional}`);
         }
 
         return parts.filter(Boolean).join(" | ");
@@ -699,6 +713,65 @@ class ParcelNet extends utils.Adapter {
         return delivery.date_expected || "";
     }
 
+    private getExpectedEndTimestamp(delivery: ParcelDelivery): number | null {
+        if (typeof delivery.timestamp_expected_end === "number" && Number.isFinite(delivery.timestamp_expected_end)) {
+            return delivery.timestamp_expected_end < 1_000_000_000_000
+                ? delivery.timestamp_expected_end * 1000
+                : delivery.timestamp_expected_end;
+        }
+
+        if (delivery.date_expected_end) {
+            const parsed = Date.parse(delivery.date_expected_end);
+            if (Number.isFinite(parsed)) {
+                return parsed;
+            }
+        }
+
+        return null;
+    }
+
+    private formatExpectedWindow(delivery: ParcelDelivery): string {
+        const startTs = this.getExpectedTimestamp(delivery);
+        const endTs = this.getExpectedEndTimestamp(delivery);
+
+        if (startTs && endTs) {
+            const start = new Date(startTs);
+            const end = new Date(endTs);
+            const sameDay = start.toLocaleDateString("de-DE") === end.toLocaleDateString("de-DE");
+            if (sameDay) {
+                return `${start.toLocaleDateString("de-DE")}, ${start.toLocaleTimeString("de-DE", { hour: "2-digit", minute: "2-digit" })} - ${end.toLocaleTimeString("de-DE", { hour: "2-digit", minute: "2-digit" })}`;
+            }
+            return `${start.toLocaleString("de-DE")} - ${end.toLocaleString("de-DE")}`;
+        }
+
+        return this.formatEta(delivery);
+    }
+
+    private getAdditionalInfo(delivery: ParcelDelivery): string {
+        const latestEvent = this.getLatestEvent(delivery);
+        const candidates = [
+            latestEvent?.additional,
+            typeof delivery.extra_information === "string" ? delivery.extra_information : "",
+            latestEvent?.event,
+        ];
+
+        for (const candidate of candidates) {
+            const text = String(candidate || "").trim();
+            if (text) {
+                return text;
+            }
+        }
+
+        return "";
+    }
+
+    private statusLabel(statusCode?: number): string {
+        if (typeof statusCode !== "number") {
+            return "Unbekannt";
+        }
+        return STATUS_TEXT[statusCode] || "Unbekannter Status";
+    }
+
     private getNextEta(deliveries: ParcelDelivery[]): string {
         const timestamps = deliveries
             .map(delivery => this.getExpectedTimestamp(delivery))
@@ -753,6 +826,9 @@ class ParcelNet extends utils.Adapter {
             });
             await this.setStateAsync(`${base}.eta`, { val: this.formatEta(delivery), ack: true });
             await this.setStateAsync(`${base}.etaRaw`, { val: String(delivery.date_expected || ""), ack: true });
+            await this.setStateAsync(`${base}.etaEndRaw`, { val: String(delivery.date_expected_end || ""), ack: true });
+            await this.setStateAsync(`${base}.expectedWindow`, { val: this.formatExpectedWindow(delivery), ack: true });
+            await this.setStateAsync(`${base}.additionalInfo`, { val: this.getAdditionalInfo(delivery), ack: true });
             await this.setStateAsync(`${base}.event`, { val: String(latestEvent?.event || ""), ack: true });
             await this.setStateAsync(`${base}.eventDate`, { val: String(latestEvent?.date || ""), ack: true });
             await this.setStateAsync(`${base}.eventLocation`, {
@@ -781,6 +857,9 @@ class ParcelNet extends utils.Adapter {
             await this.setStateAsync(`${base}.statusText`, { val: "", ack: true });
             await this.setStateAsync(`${base}.eta`, { val: "", ack: true });
             await this.setStateAsync(`${base}.etaRaw`, { val: "", ack: true });
+            await this.setStateAsync(`${base}.etaEndRaw`, { val: "", ack: true });
+            await this.setStateAsync(`${base}.expectedWindow`, { val: "", ack: true });
+            await this.setStateAsync(`${base}.additionalInfo`, { val: "", ack: true });
             await this.setStateAsync(`${base}.event`, { val: "", ack: true });
             await this.setStateAsync(`${base}.eventDate`, { val: "", ack: true });
             await this.setStateAsync(`${base}.eventLocation`, { val: "", ack: true });
@@ -811,6 +890,9 @@ class ParcelNet extends utils.Adapter {
             { id: "statusText", type: "string", role: "text", def: "" },
             { id: "eta", type: "string", role: "text", def: "" },
             { id: "etaRaw", type: "string", role: "text", def: "" },
+            { id: "etaEndRaw", type: "string", role: "text", def: "" },
+            { id: "expectedWindow", type: "string", role: "text", def: "" },
+            { id: "additionalInfo", type: "string", role: "text", def: "" },
             { id: "event", type: "string", role: "text", def: "" },
             { id: "eventDate", type: "string", role: "text", def: "" },
             { id: "eventLocation", type: "string", role: "text", def: "" },
@@ -844,77 +926,79 @@ class ParcelNet extends utils.Adapter {
 
     private getDummyDeliveries(): ParcelDelivery[] {
         return [
-            { carrier_code: "dhl", description: "Demo DHL Sendung", status_code: 2, tracking_number: "DHL-DEMO-001", date_expected: new Date(Date.now() + 86400000).toISOString(), events: [{ event: "Demoansicht aktiv", date: new Date().toISOString(), additional: "Voraussichtliche Zustellung morgen zwischen 10:00 und 14:00 Uhr" }] },
-            { carrier_code: "hermes", description: "Demo Hermes Sendung", status_code: 4, tracking_number: "HERMES-DEMO-001", date_expected: new Date(Date.now() + 3600000 * 6).toISOString(), events: [{ event: "Demoansicht aktiv", date: new Date().toISOString(), additional: "Zustellung heute 14:00–18:00 Uhr" }] },
-            { carrier_code: "dpd", description: "Demo DPD Sendung", status_code: 3, tracking_number: "DPD-DEMO-001", date_expected: new Date(Date.now() + 86400000 * 2).toISOString(), events: [{ event: "Demoansicht aktiv", date: new Date().toISOString(), additional: "Ab morgen im Pickup Paketshop" }] },
-            { carrier_code: "ups", description: "Demo UPS Sendung", status_code: 2, tracking_number: "UPS-DEMO-001", date_expected: new Date(Date.now() + 86400000).toISOString(), events: [{ event: "Demoansicht aktiv", date: new Date().toISOString(), additional: "Geplante Lieferung bis 12:00 Uhr" }] },
-            { carrier_code: "amazon", description: "Demo Amazon Sendung", status_code: 4, tracking_number: "AMZ-DEMO-001", date_expected: new Date(Date.now() + 3600000 * 3).toISOString(), events: [{ event: "Demoansicht aktiv", date: new Date().toISOString(), additional: "Noch 3 Stopps entfernt" }] },
-            { carrier_code: "gls", description: "Demo GLS Sendung", status_code: 2, tracking_number: "GLS-DEMO-001", date_expected: new Date(Date.now() + 86400000 * 3).toISOString(), events: [{ event: "Demoansicht aktiv", date: new Date().toISOString(), additional: "Lieferung in 2–3 Werktagen" }] },
-            { carrier_code: "deutschepost", description: "Demo Deutsche Post Sendung", status_code: 8, tracking_number: "POST-DEMO-001", date_expected: new Date(Date.now() + 86400000).toISOString(), events: [{ event: "Demoansicht aktiv", date: new Date().toISOString(), additional: "Sendung elektronisch angekündigt" }] },
-            { carrier_code: "fedex", description: "Demo FedEx Sendung", status_code: 2, tracking_number: "FEDEX-DEMO-001", date_expected: new Date(Date.now() + 86400000 * 4).toISOString(), events: [{ event: "Demoansicht aktiv", date: new Date().toISOString(), additional: "Internationaler Versand" }] },
+            { carrier_code: "dhl", description: "Demo DHL Sendung", status_code: 2, tracking_number: "DHL-DEMO-001", date_expected: new Date(Date.now() + 86400000).toISOString(), date_expected_end: new Date(Date.now() + 86400000 + 4 * 3600000).toISOString(), extra_information: "Voraussichtliche Zustellung morgen zwischen 10:00 und 14:00 Uhr", events: [{ event: "Unterwegs", date: new Date().toISOString(), additional: "Voraussichtliche Zustellung morgen zwischen 10:00 und 14:00 Uhr" }] },
+            { carrier_code: "hermes", description: "Demo Hermes Sendung", status_code: 4, tracking_number: "HERMES-DEMO-001", date_expected: new Date(Date.now() + 3600000 * 6).toISOString(), date_expected_end: new Date(Date.now() + 3600000 * 10).toISOString(), extra_information: "Heute in Zustellung", events: [{ event: "In Zustellung", date: new Date().toISOString(), additional: "Zustellung heute 14:00–18:00 Uhr" }] },
+            { carrier_code: "dpd", description: "Demo DPD Sendung", status_code: 3, tracking_number: "DPD-DEMO-001", date_expected: new Date(Date.now() + 86400000 * 2).toISOString(), extra_information: "Ab morgen im Pickup Paketshop", events: [{ event: "Zur Abholung bereit", date: new Date().toISOString(), additional: "Ab morgen im Pickup Paketshop" }] },
+            { carrier_code: "ups", description: "Demo UPS Sendung", status_code: 2, tracking_number: "UPS-DEMO-001", date_expected: new Date(Date.now() + 86400000).toISOString(), date_expected_end: new Date(Date.now() + 86400000 + 2 * 3600000).toISOString(), extra_information: "Geplante Lieferung bis 12:00 Uhr", events: [{ event: "Unterwegs", date: new Date().toISOString(), additional: "Geplante Lieferung bis 12:00 Uhr" }] },
+            { carrier_code: "amazon", description: "Demo Amazon Sendung", status_code: 4, tracking_number: "AMZ-DEMO-001", date_expected: new Date(Date.now() + 3600000 * 3).toISOString(), extra_information: "Noch 3 Stopps entfernt", events: [{ event: "In Zustellung", date: new Date().toISOString(), additional: "Noch 3 Stopps entfernt" }] },
+            { carrier_code: "gls", description: "Demo GLS Sendung", status_code: 2, tracking_number: "GLS-DEMO-001", date_expected: new Date(Date.now() + 86400000 * 3).toISOString(), extra_information: "Lieferung in 2–3 Werktagen", events: [{ event: "Unterwegs", date: new Date().toISOString(), additional: "Lieferung in 2–3 Werktagen" }] },
+            { carrier_code: "deutschepost", description: "Demo Deutsche Post Sendung", status_code: 8, tracking_number: "POST-DEMO-001", date_expected: new Date(Date.now() + 86400000).toISOString(), extra_information: "Sendung elektronisch angekündigt", events: [{ event: "Elektronisch angekündigt", date: new Date().toISOString(), additional: "Sendung elektronisch angekündigt" }] },
+            { carrier_code: "fedex", description: "Demo FedEx Sendung", status_code: 2, tracking_number: "FEDEX-DEMO-001", date_expected: new Date(Date.now() + 86400000 * 4).toISOString(), extra_information: "Internationaler Versand", events: [{ event: "Unterwegs", date: new Date().toISOString(), additional: "Internationaler Versand" }] },
         ];
     }
 
     private renderHtml(deliveries: ParcelDelivery[], compact: boolean): string {
+
         const maxItems = Math.max(1, Number(this.config.maxItemsInHtml) || 10);
         const showTracking = Boolean(this.config.showTrackingNumberInHtml);
         const useDummies = deliveries.length === 0;
         const items = (useDummies ? this.getDummyDeliveries() : deliveries).slice(0, maxItems);
 
-        const containerPadding = compact ? "8px" : "10px";
+        const containerPadding = compact ? "6px" : "8px";
         const cardPadding = compact ? "8px 10px" : "10px 12px";
-        const titleSize = compact ? "13px" : "15px";
-        const textSize = compact ? "11px" : "12px";
+        const titleSize = compact ? "14px" : "16px";
+        const textSize = compact ? "11px" : "13px";
         const metaSize = compact ? "10px" : "11px";
         const gap = compact ? "6px" : "8px";
-        const iconSize = compact ? 34 : 42;
+        const iconSize = compact ? 68 : 84;
         const badgePad = compact ? "3px 8px" : "4px 10px";
+        const chipFont = compact ? "10px" : "11px";
 
         const rows = items.map((delivery) => {
-            const latestEvent = this.getLatestEvent(delivery);
+            const planned = this.formatExpectedWindow(delivery);
+            const additional = this.getAdditionalInfo(delivery);
             const statusCode = typeof delivery.status_code === "number" ? delivery.status_code : -1;
-            const statusText = this.statusText(delivery.status_code);
-            const eta = this.formatEta(delivery);
+            const statusLabel = this.statusLabel(delivery.status_code);
             const badgeColor = this.statusColor(statusCode);
             const carrier = this.getCarrierMeta(delivery);
 
+            const chips: string[] = [];
+            if (showTracking && delivery.tracking_number) {
+                chips.push(`<div style="padding:4px 8px;border-radius:999px;background:rgba(255,255,255,.08);font-size:${chipFont};line-height:1.2;">Tracking: <b>${this.escapeHtml(String(delivery.tracking_number))}</b></div>`);
+            }
+            chips.push(`<div style="padding:4px 8px;border-radius:999px;background:${badgeColor};font-size:${chipFont};line-height:1.2;color:#fff;">${this.escapeHtml(statusLabel)}</div>`);
+            if (carrier.name) {
+                chips.push(`<div style="padding:4px 8px;border-radius:999px;background:rgba(255,255,255,.08);font-size:${chipFont};line-height:1.2;">${this.escapeHtml(carrier.name)}</div>`);
+            }
+
             return `
-<div style="padding:${cardPadding};border-radius:12px;background:#1f2937;color:#fff;border:1px solid rgba(255,255,255,.08);box-shadow:0 2px 8px rgba(0,0,0,.14);">
-  <div style="display:flex;align-items:flex-start;gap:${gap};min-width:0;">
-    <div style="width:${iconSize}px;height:${iconSize}px;min-width:${iconSize}px;display:flex;align-items:center;justify-content:center;overflow:hidden;flex:none;">
+<div style="padding:${cardPadding};border-radius:14px;background:rgba(255,255,255,.04);color:#fff;border:1px solid rgba(255,255,255,.10);box-sizing:border-box;">
+  <div style="display:grid;grid-template-columns:${iconSize}px minmax(0,1fr);gap:${gap};align-items:start;">
+    <div style="width:${iconSize}px;height:${iconSize}px;display:flex;align-items:center;justify-content:center;overflow:hidden;">
       <img src="${this.escapeHtml(carrier.icon)}" alt="${this.escapeHtml(carrier.name)}" style="width:100%;height:100%;object-fit:contain;display:block;background:transparent;" />
     </div>
-    <div style="min-width:0;flex:1;">
-      <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:${gap};min-width:0;">
-        <div style="min-width:0;flex:1;">
-          <div style="font-size:${titleSize};font-weight:700;line-height:1.25;word-break:break-word;">${this.escapeHtml(String(delivery.description || "Unbenannte Lieferung"))}</div>
-          <div style="margin-top:1px;font-size:${textSize};opacity:.82;line-height:1.2;">${this.escapeHtml(carrier.name)}</div>
-        </div>
-        <div style="font-size:${metaSize};padding:${badgePad};border-radius:999px;background:${badgeColor};white-space:nowrap;line-height:1;">${this.escapeHtml(statusText)}</div>
-      </div>
-      <div style="margin-top:6px;display:grid;gap:2px;font-size:${textSize};line-height:1.28;opacity:.94;">
-        ${showTracking ? `<div>Tracking: <b>${this.escapeHtml(String(delivery.tracking_number || "-"))}</b></div>` : ""}
-        ${eta ? `<div>ETA: <b>${this.escapeHtml(eta)}</b></div>` : ""}
-        ${latestEvent?.additional ? `<div>Info: <b>${this.escapeHtml(latestEvent.additional)}</b></div>` : ""}
-        ${eta ? `<div>Geplante Lieferung: <b>${this.escapeHtml(eta)}</b></div>` : ""}
-      </div>
+    <div style="min-width:0;display:grid;gap:6px;">
+      <div style="font-size:${titleSize};font-weight:700;line-height:1.2;word-break:break-word;">${this.escapeHtml(String(delivery.description || "Unbenannte Lieferung"))}</div>
+      <div style="display:flex;flex-wrap:wrap;gap:6px;align-items:center;">${chips.join("")}</div>
+      ${planned ? `<div style="font-size:${textSize};line-height:1.35;"><span style="opacity:.72;">Geplante Lieferung:</span> <b>${this.escapeHtml(planned)}</b></div>` : ""}
+      ${additional ? `<div style="font-size:${textSize};line-height:1.35;"><span style="opacity:.72;">Zusatzinfo:</span> <b>${this.escapeHtml(additional)}</b></div>` : ""}
     </div>
   </div>
 </div>`;
         }).join("");
 
         const subtitle = useDummies
-            ? `Keine aktiven Sendungen • Demoansicht mit ${items.length} Carriern`
-            : `${deliveries.length} aktiv`;
+            ? `Keine aktiven Sendungen · Demoansicht mit ${items.length} Carriern`
+            : `${deliveries.length} aktive Sendung${deliveries.length === 1 ? "" : "en"}`;
 
         const infoBanner = useDummies
-            ? `<div style="margin-bottom:${gap};padding:${compact ? "6px 8px" : "8px 10px"};border-radius:10px;background:#0f172a;border:1px solid rgba(255,255,255,.08);font-size:${textSize};opacity:.92;line-height:1.25;">Aktuell liefert die Parcel-API keine Sendungen. Zur VIS-Vorschau werden Demo-Carrier eingeblendet.</div>`
+            ? `<div style="margin-bottom:${gap};padding:${compact ? "6px 8px" : "8px 10px"};border-radius:10px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);font-size:${textSize};opacity:.92;line-height:1.25;">Aktuell liefert die Parcel-API keine Sendungen. Zur VIS-Vorschau werden Demo-Carrier eingeblendet.</div>`
             : "";
 
         return `
-<div style="font-family:Arial,sans-serif;background:#111827;color:#fff;padding:${containerPadding};border-radius:14px;box-sizing:border-box;height:100%;min-height:100%;overflow-y:auto;overflow-x:hidden;scrollbar-width:thin;">
-  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:${gap};gap:${gap};position:sticky;top:0;background:#111827;padding-bottom:${gap};z-index:2;">
-    <div style="font-size:${compact ? "15px" : "17px"};font-weight:700;line-height:1.1;">Parcel Lieferungen</div>
+<div style="font-family:Arial,sans-serif;background:transparent;color:#fff;padding:${containerPadding};box-sizing:border-box;height:100%;min-height:100%;overflow-y:auto;overflow-x:hidden;scrollbar-width:thin;">
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:${gap};gap:${gap};position:sticky;top:0;background:rgba(0,0,0,.0);backdrop-filter:blur(0px);padding-bottom:${gap};z-index:2;">
+    <div style="font-size:${compact ? "15px" : "18px"};font-weight:700;line-height:1.1;">Parcel Lieferungen</div>
     <div style="font-size:${metaSize};opacity:.82;text-align:right;">${this.escapeHtml(subtitle)}</div>
   </div>
   ${infoBanner}
