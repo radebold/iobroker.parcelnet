@@ -1,7 +1,7 @@
 {
   "common": {
     "name": "parcelnet",
-    "version": "0.5.5",
+    "version": "0.5.6",
     "news": {
       "0.5.0": {
         "en": "Initial TypeScript adapter version with Parcel API polling, item states, manual refresh and VIS HTML output.",
@@ -10,6 +10,10 @@
       "0.5.5": {
         "en": "Updated adapter icon with a custom ParcelNet logo variant.",
         "de": "Adapter-Icon mit einer angepassten ParcelNet-Logo-Variante aktualisiert."
+      },
+      "0.5.6": {
+        "en": "Removed the startup wrapper and embedded the runtime directly into main.js so the adapter starts reliably from ZIP installations.",
+        "de": "Start-Wrapper entfernt und die Laufzeit direkt in main.js eingebettet, damit der Adapter aus ZIP-Installationen zuverlässig startet."
       }
     },
     "titleLang": {
@@ -39,7 +43,7 @@
     "loglevel": "info",
     "mode": "daemon",
     "type": "misc-data",
-    "compact": true,
+    "compact": false,
     "connectionType": "cloud",
     "dataSource": "poll",
     "materialize": true,
