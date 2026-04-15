@@ -1,7 +1,7 @@
 {
   "common": {
     "name": "parcelnet",
-    "version": "0.6.3-hotfix4",
+    "version": "0.6.3-hotfix5",
     "news": {
       "0.5.0": {
         "en": "Initial TypeScript adapter version with Parcel API polling, item states, manual refresh and VIS HTML output.",
@@ -39,6 +39,10 @@
       "0.6.3-hotfix4": {
         "en": "Added VIS sorting options and dedicated count states for active and in-delivery shipments.",
         "de": "VIS-Sortierung ergänzt und eigene Zähl-States für aktive Sendungen sowie Sendungen in Zustellung hinzugefügt."
+      },
+      "0.6.3-hotfix5": {
+        "en": "Carrier logo fields now expose direct upload options in the adapter UI and keep the per-carrier selection workflow.",
+        "de": "Carrier-Logo-Felder bieten jetzt direkte Upload-Optionen in der Adapter-UI und behalten die Auswahl pro Carrier bei."
       }
     },
     "titleLang": {

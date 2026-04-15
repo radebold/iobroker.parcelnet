@@ -196,8 +196,8 @@
         "logoInfo": {
           "type": "staticText",
           "text": {
-            "en": "Upload your own logo files in the selected folder and choose them per carrier below. The adapter uses the selected file path directly in the VIS HTML.",
-            "de": "Lade deine eigenen Logo-Dateien in den gewählten Ordner hoch und wähle sie unten pro Carrier aus. Der Adapter nutzt den ausgewählten Dateipfad direkt im VIS-HTML."
+            "en": "Upload your own logo files directly here in the adapter UI and then select them per carrier. If your admin version does not show the upload button, upload once via Files and then choose the file here.",
+            "de": "Lade deine eigenen Logo-Dateien direkt hier in der Adapter-UI hoch und wähle sie danach pro Carrier aus. Falls deine Admin-Version keinen Upload-Button zeigt, lade die Datei einmal über Dateien hoch und wähle sie dann hier aus."
           },
           "sm": 12,
           "md": 12,
@@ -210,8 +210,8 @@
             "de": "Logo-Ordner"
           },
           "help": {
-            "en": "Example: /vis.0/main/img/parcelnet",
-            "de": "Beispiel: /vis.0/main/img/parcelnet"
+            "en": "Target folder for uploaded carrier logos. Recommended: /vis.0/main/img/parcelnet",
+            "de": "Zielordner für hochgeladene Carrier-Logos. Empfohlen: /vis.0/main/img/parcelnet"
           },
           "sm": 12,
           "md": 8,
@@ -230,7 +230,14 @@
           "folder": "data:vis.0/main/img/parcelnet",
           "allowUpload": true,
           "allowCreateFolder": true,
-          "pattern": "(?i).+\\.(png|svg|jpg|jpeg|webp)$"
+          "pattern": "(?i).+\\.(png|svg|jpg|jpeg|webp)$",
+          "help": {
+            "en": "Use the upload button in this field to add a local image, then select it here.",
+            "de": "Nutze den Upload-Button in diesem Feld, um eine lokale Bilddatei hochzuladen und sie danach hier auszuwählen."
+          },
+          "allowDownload": true,
+          "showToolbar": true,
+          "showFilenameOnly": true
         },
         "carrierLogo_dhl": {
           "type": "fileSelector",
@@ -244,7 +251,15 @@
           "root": "dataFiles",
           "folder": "data:vis.0/main/img/parcelnet",
           "allowUpload": true,
-          "pattern": "(?i).+\\.(png|svg|jpg|jpeg|webp)$"
+          "pattern": "(?i).+\\.(png|svg|jpg|jpeg|webp)$",
+          "help": {
+            "en": "Use the upload button in this field to add a local image, then select it here.",
+            "de": "Nutze den Upload-Button in diesem Feld, um eine lokale Bilddatei hochzuladen und sie danach hier auszuwählen."
+          },
+          "allowCreateFolder": true,
+          "allowDownload": true,
+          "showToolbar": true,
+          "showFilenameOnly": true
         },
         "carrierLogo_hermes": {
           "type": "fileSelector",
@@ -258,7 +273,15 @@
           "root": "dataFiles",
           "folder": "data:vis.0/main/img/parcelnet",
           "allowUpload": true,
-          "pattern": "(?i).+\\.(png|svg|jpg|jpeg|webp)$"
+          "pattern": "(?i).+\\.(png|svg|jpg|jpeg|webp)$",
+          "help": {
+            "en": "Use the upload button in this field to add a local image, then select it here.",
+            "de": "Nutze den Upload-Button in diesem Feld, um eine lokale Bilddatei hochzuladen und sie danach hier auszuwählen."
+          },
+          "allowCreateFolder": true,
+          "allowDownload": true,
+          "showToolbar": true,
+          "showFilenameOnly": true
         },
         "carrierLogo_dpd": {
           "type": "fileSelector",
@@ -272,7 +295,15 @@
           "root": "dataFiles",
           "folder": "data:vis.0/main/img/parcelnet",
           "allowUpload": true,
-          "pattern": "(?i).+\\.(png|svg|jpg|jpeg|webp)$"
+          "pattern": "(?i).+\\.(png|svg|jpg|jpeg|webp)$",
+          "help": {
+            "en": "Use the upload button in this field to add a local image, then select it here.",
+            "de": "Nutze den Upload-Button in diesem Feld, um eine lokale Bilddatei hochzuladen und sie danach hier auszuwählen."
+          },
+          "allowCreateFolder": true,
+          "allowDownload": true,
+          "showToolbar": true,
+          "showFilenameOnly": true
         },
         "carrierLogo_ups": {
           "type": "fileSelector",
@@ -286,7 +317,15 @@
           "root": "dataFiles",
           "folder": "data:vis.0/main/img/parcelnet",
           "allowUpload": true,
-          "pattern": "(?i).+\\.(png|svg|jpg|jpeg|webp)$"
+          "pattern": "(?i).+\\.(png|svg|jpg|jpeg|webp)$",
+          "help": {
+            "en": "Use the upload button in this field to add a local image, then select it here.",
+            "de": "Nutze den Upload-Button in diesem Feld, um eine lokale Bilddatei hochzuladen und sie danach hier auszuwählen."
+          },
+          "allowCreateFolder": true,
+          "allowDownload": true,
+          "showToolbar": true,
+          "showFilenameOnly": true
         },
         "carrierLogo_amazon": {
           "type": "fileSelector",
@@ -300,7 +339,15 @@
           "root": "dataFiles",
           "folder": "data:vis.0/main/img/parcelnet",
           "allowUpload": true,
-          "pattern": "(?i).+\\.(png|svg|jpg|jpeg|webp)$"
+          "pattern": "(?i).+\\.(png|svg|jpg|jpeg|webp)$",
+          "help": {
+            "en": "Use the upload button in this field to add a local image, then select it here.",
+            "de": "Nutze den Upload-Button in diesem Feld, um eine lokale Bilddatei hochzuladen und sie danach hier auszuwählen."
+          },
+          "allowCreateFolder": true,
+          "allowDownload": true,
+          "showToolbar": true,
+          "showFilenameOnly": true
         },
         "carrierLogo_gls": {
           "type": "fileSelector",
@@ -314,7 +361,15 @@
           "root": "dataFiles",
           "folder": "data:vis.0/main/img/parcelnet",
           "allowUpload": true,
-          "pattern": "(?i).+\\.(png|svg|jpg|jpeg|webp)$"
+          "pattern": "(?i).+\\.(png|svg|jpg|jpeg|webp)$",
+          "help": {
+            "en": "Use the upload button in this field to add a local image, then select it here.",
+            "de": "Nutze den Upload-Button in diesem Feld, um eine lokale Bilddatei hochzuladen und sie danach hier auszuwählen."
+          },
+          "allowCreateFolder": true,
+          "allowDownload": true,
+          "showToolbar": true,
+          "showFilenameOnly": true
         },
         "carrierLogo_deutschepost": {
           "type": "fileSelector",
@@ -328,7 +383,15 @@
           "root": "dataFiles",
           "folder": "data:vis.0/main/img/parcelnet",
           "allowUpload": true,
-          "pattern": "(?i).+\\.(png|svg|jpg|jpeg|webp)$"
+          "pattern": "(?i).+\\.(png|svg|jpg|jpeg|webp)$",
+          "help": {
+            "en": "Use the upload button in this field to add a local image, then select it here.",
+            "de": "Nutze den Upload-Button in diesem Feld, um eine lokale Bilddatei hochzuladen und sie danach hier auszuwählen."
+          },
+          "allowCreateFolder": true,
+          "allowDownload": true,
+          "showToolbar": true,
+          "showFilenameOnly": true
         },
         "carrierLogo_fedex": {
           "type": "fileSelector",
@@ -342,7 +405,15 @@
           "root": "dataFiles",
           "folder": "data:vis.0/main/img/parcelnet",
           "allowUpload": true,
-          "pattern": "(?i).+\\.(png|svg|jpg|jpeg|webp)$"
+          "pattern": "(?i).+\\.(png|svg|jpg|jpeg|webp)$",
+          "help": {
+            "en": "Use the upload button in this field to add a local image, then select it here.",
+            "de": "Nutze den Upload-Button in diesem Feld, um eine lokale Bilddatei hochzuladen und sie danach hier auszuwählen."
+          },
+          "allowCreateFolder": true,
+          "allowDownload": true,
+          "showToolbar": true,
+          "showFilenameOnly": true
         }
       }
     }
