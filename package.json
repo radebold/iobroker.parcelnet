@@ -1,6 +1,6 @@
 {
   "name": "iobroker.parcelnet",
-  "version": "0.5.2",
+  "version": "0.5.4",
   "description": "ioBroker adapter for Parcel App deliveries",
   "author": {
     "name": "Thomas Radebold / OpenAI"
@@ -19,7 +19,7 @@
     "url": "https://github.com/radebold/parcelnet"
   },
   "engines": {
-    "node": ">=16"
+    "node": ">=18"
   },
   "main": "main.js",
   "files": [
@@ -34,8 +34,7 @@
   ],
   "scripts": {
     "build": "tsc -p tsconfig.json",
-    "clean": "node -e \"require('fs').rmSync('build', { recursive: true, force: true });\"",
-    "prepare": "npm run build"
+    "clean": "node -e \"require('fs').rmSync('build', { recursive: true, force: true });\""
   },
   "dependencies": {
     "@iobroker/adapter-core": "^3.2.3"

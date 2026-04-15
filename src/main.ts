@@ -1,5 +1,4 @@
 import * as utils from "@iobroker/adapter-core";
-import * as https from "https";
 
 type FilterMode = "active" | "recent";
 
@@ -60,35 +59,28 @@ class ParcelNet extends utils.Adapter {
     }
 
     private async onReady(): Promise<void> {
-        this.log.info("ParcelNet Adapter startet ...");
-
         try {
+            this.log.info("ParcelNet Adapter startet ...");
             await this.createObjects();
-            this.subscribeStates("tools.refreshNow");
+        this.subscribeStates("tools.refreshNow");
 
-            const previousCountState = await this.getStateAsync("deliveries.count");
-            this.previousCount = Number(previousCountState?.val || 0);
+        const previousCountState = await this.getStateAsync("deliveries.count");
+        this.previousCount = Number(previousCountState?.val || 0);
 
-            await this.setStateAsync("info.connection", { val: false, ack: true });
-            await this.setStateAsync("tools.refreshNow", { val: false, ack: true });
+        await this.setStateAsync("info.connection", { val: false, ack: true });
+        await this.setStateAsync("tools.refreshNow", { val: false, ack: true });
 
             this.normalizeConfig();
-            this.log.info(
-                `Konfiguration geladen: filterMode=${this.config.filterMode}, poll=${this.config.pollIntervalMinutes} min, timeout=${this.config.requestTimeoutMs} ms`,
-            );
-
             await this.updateDeliveries("startup");
             this.startPolling();
-            this.log.info("ParcelNet Adapter bereit.");
-        } catch (error) {
-            const message = error instanceof Error ? error.message : String(error);
+            this.log.info("ParcelNet Adapter erfolgreich initialisiert.");
+        } catch (error: any) {
+            const message = error?.stack || error?.message || String(error);
             this.log.error(`Startfehler im Adapter: ${message}`);
-
             try {
-                await this.setStateAsync("info.connection", { val: false, ack: true });
-                await this.setStateAsync("info.lastError", { val: message, ack: true });
+                await this.setStateAsync("info.lastError", { val: String(error?.message || error), ack: true });
             } catch {
-                // ignore secondary state errors during startup
+                // ignore
             }
         }
     }
@@ -158,7 +150,7 @@ class ParcelNet extends utils.Adapter {
             common: {
                 name: "Last successful update",
                 type: "string",
-                role: "text",
+                role: "date",
                 read: true,
                 write: false,
                 def: "",
@@ -399,69 +391,60 @@ class ParcelNet extends utils.Adapter {
         const filterMode: FilterMode = this.config.filterMode === "recent" ? "recent" : "active";
         const url = `https://api.parcel.app/external/deliveries/?filter_mode=${filterMode}`;
 
-        const text = await new Promise<string>((resolve, reject) => {
-            const request = https.request(
-                url,
-                {
-                    method: "GET",
-                    headers: {
-                        "api-key": apiKey,
-                        Accept: "application/json",
-                    },
-                    timeout: Number(this.config.requestTimeoutMs) || 15000,
-                },
-                response => {
-                    let body = "";
-                    response.on("data", chunk => {
-                        body += chunk.toString();
-                    });
-                    response.on("end", () => {
-                        const statusCode = response.statusCode || 0;
-                        if (statusCode >= 400) {
-                            reject(new Error(`HTTP ${statusCode}: ${body}`));
-                            return;
-                        }
-                        resolve(body);
-                    });
-                },
-            );
+        const controller = new AbortController();
+        const timeout: any = setTimeout(() => controller.abort(), Number(this.config.requestTimeoutMs) || 15000);
 
-            request.on("timeout", () => {
-                request.destroy(new Error(`Timeout nach ${this.config.requestTimeoutMs} ms`));
-            });
-            request.on("error", error => reject(error));
-            request.end();
-        });
-
-        if (this.config.logRawResponse) {
-            this.log.debug(`RAW Parcel Response: ${text}`);
-        }
-
-        let parsed: ParcelApiResponse | ParcelDelivery[] | unknown;
         try {
-            parsed = JSON.parse(text);
-        } catch (error) {
-            throw new Error(`JSON-Parse-Fehler: ${error instanceof Error ? error.message : String(error)}`);
-        }
+            this.log.debug(`Hole Parcel-Daten von ${url}`);
+            const response = await fetch(url, {
+                method: "GET",
+                headers: {
+                    "api-key": apiKey,
+                    Accept: "application/json",
+                },
+                signal: controller.signal,
+            });
 
-        if (Array.isArray(parsed)) {
-            return parsed as ParcelDelivery[];
-        }
+            const text = await response.text();
 
-        if (!parsed || typeof parsed !== "object") {
-            throw new Error("Antwort ist kein gültiges JSON-Objekt.");
-        }
+            if (this.config.logRawResponse) {
+                this.log.debug(`RAW Parcel Response: ${text}`);
+            }
 
-        const data = parsed as ParcelApiResponse;
-        if (data.success === false) {
-            throw new Error(data.error_message || "Parcel API meldet success=false.");
-        }
+            if (!response.ok) {
+                throw new Error(`HTTP ${response.status}: ${text}`);
+            }
 
-        if (!Array.isArray(data.deliveries)) {
-            return [];
-        }
+            let parsed: ParcelApiResponse | ParcelDelivery[] | unknown;
+            try {
+                parsed = JSON.parse(text);
+            } catch (error) {
+                throw new Error(
+                    `JSON-Parse-Fehler: ${error instanceof Error ? error.message : String(error)}`,
+                );
+            }
 
-        return data.deliveries;
+            if (Array.isArray(parsed)) {
+                return parsed as ParcelDelivery[];
+            }
+
+            if (!parsed || typeof parsed !== "object") {
+                throw new Error("Antwort ist kein gültiges JSON-Objekt.");
+            }
+
+            const data = parsed as ParcelApiResponse;
+            if (data.success === false) {
+                throw new Error(data.error_message || "Parcel API meldet success=false.");
+            }
+
+            if (!Array.isArray(data.deliveries)) {
+                return [];
+            }
+
+            return data.deliveries;
+        } finally {
+            clearTimeout(timeout);
+        }
     }
 
     private buildFormattedList(deliveries: ParcelDelivery[]): string {
@@ -769,8 +752,8 @@ class ParcelNet extends utils.Adapter {
     }
 }
 
-if (require.main !== module) {
-    module.exports = (options: Partial<utils.AdapterOptions> | undefined) => new ParcelNet(options);
-} else {
-    (() => new ParcelNet())();
+export function startAdapter(options: Partial<utils.AdapterOptions> | undefined = undefined): ParcelNet {
+    return new ParcelNet(options);
 }
+
+module.exports = startAdapter;
