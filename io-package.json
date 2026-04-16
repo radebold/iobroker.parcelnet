@@ -1,73 +1,29 @@
 {
   "common": {
     "name": "parcelnet",
-    "version": "0.7.0-beta.4",
+    "version": "0.7.0-beta.5",
     "news": {
       "0.5.0": {
         "en": "Initial TypeScript adapter version with Parcel API polling, item states, manual refresh and VIS HTML output.",
         "de": "Erste TypeScript-Adapterversion mit Parcel-API-Polling, Einzelzuständen, manuellem Refresh und VIS-HTML-Ausgabe."
       },
-      "0.5.5": {
-        "en": "Updated adapter icon with a custom ParcelNet logo variant.",
-        "de": "Adapter-Icon mit einer angepassten ParcelNet-Logo-Variante aktualisiert."
-      },
-      "0.5.6": {
-        "en": "Removed the startup wrapper and embedded the runtime directly into main.js so the adapter starts reliably from ZIP installations.",
-        "de": "Start-Wrapper entfernt und die Laufzeit direkt in main.js eingebettet, damit der Adapter aus ZIP-Installationen zuverlässig startet."
-      },
-      "0.6.0": {
-        "en": "Added local carrier badge icons and new JSON states for VIS json widgets, including allProviderJson and inDelivery.",
-        "de": "Lokale Carrier-Badge-Icons und neue JSON-States für VIS-json-Widgets hinzugefügt, inklusive allProviderJson und inDelivery."
-      },
-      "0.6.1": {
-        "en": "Removed stylized carrier icons and kept Parcel-style VIS JSON states.",
-        "de": "Stilisierte Carrier-Icons entfernt und Parcel-artige VIS-JSON-States beibehalten.",
-        "ru": "Стилизованные иконки перевозчиков удалены, JSON-состояния для VIS сохранены в стиле Parcel.",
-        "pt": "Ícones estilizados das transportadoras removidos e mantidos os estados JSON do VIS em estilo Parcel.",
-        "nl": "Gestileerde vervoerder-iconen verwijderd en Parcel-achtige VIS-JSON-states behouden.",
-        "fr": "Icônes stylisées des transporteurs supprimées et états JSON VIS conservés dans le style Parcel.",
-        "it": "Rimosse le icone stilizzate dei corrieri e mantenuti gli stati JSON VIS in stile Parcel.",
-        "es": "Se eliminaron los iconos estilizados de transportistas y se mantuvieron los estados JSON VIS al estilo Parcel.",
-        "pl": "Usunięto stylizowane ikony przewoźników i pozostawiono stany JSON VIS w stylu Parcel.",
-        "uk": "Видалено стилізовані значки перевізників, а JSON-стани VIS залишено у стилі Parcel.",
-        "zh-cn": "已移除风格化承运商图标，并保留 Parcel 风格的 VIS JSON 状态。"
-      },
-      "0.7.0-beta.4": {
-        "en": "Beta 4: restored full admin UI including carrier logos, updated icon and checker metadata fixes.",
-        "de": "Beta 4: vollständige Admin-UI inkl. Carrier-Logos wiederhergestellt, neues Icon und Checker-Metadaten-Fixes."
+      "0.7.0-beta.5": {
+        "en": "Version alignment hotfix: all package metadata synchronized to 0.7.0-beta.5.",
+        "de": "Versionsabgleich-Hotfix: alle Paket-Metadaten auf 0.7.0-beta.5 synchronisiert."
       }
     },
     "titleLang": {
       "en": "ParcelNet",
-      "de": "ParcelNet",
-      "ru": "ParcelNet",
-      "pt": "ParcelNet",
-      "nl": "ParcelNet",
-      "fr": "ParcelNet",
-      "it": "ParcelNet",
-      "es": "ParcelNet",
-      "pl": "ParcelNet",
-      "uk": "ParcelNet",
-      "zh-cn": "ParcelNet"
+      "de": "ParcelNet"
     },
     "desc": {
       "en": "Reads active or recent deliveries from Parcel App and exposes them as ioBroker states.",
-      "de": "Liest aktive oder kürzliche Sendungen aus Parcel App und stellt sie als ioBroker-States bereit.",
-      "ru": "Считывает активные или недавние отправления из Parcel App и предоставляет их как состояния ioBroker.",
-      "pt": "Lê entregas ativas ou recentes do Parcel App e as disponibiliza como estados no ioBroker.",
-      "nl": "Leest actieve of recente zendingen uit Parcel App en stelt ze beschikbaar als ioBroker-statussen.",
-      "fr": "Lit les livraisons actives ou récentes de Parcel App et les expose comme états ioBroker.",
-      "it": "Legge le spedizioni attive o recenti da Parcel App e le espone come stati di ioBroker.",
-      "es": "Lee entregas activas o recientes de Parcel App y las expone como estados de ioBroker.",
-      "pl": "Odczytuje aktywne lub ostatnie przesyłki z Parcel App i udostępnia je jako stany ioBroker.",
-      "uk": "Зчитує активні або нещодавні відправлення з Parcel App і надає їх як стани ioBroker.",
-      "zh-cn": "从 Parcel App 读取活动或最近的包裹，并将其作为 ioBroker 状态提供。"
+      "de": "Liest aktive oder kürzliche Sendungen aus Parcel App und stellt sie als ioBroker-States bereit."
     },
     "authors": [
-      "Thomas Radebold"
+      "Thomas Radebold / OpenAI"
     ],
     "keywords": [
-      "ioBroker",
       "parcel",
       "deliveries",
       "tracking",
@@ -80,8 +36,8 @@
     "readme": "https://github.com/radebold/ioBroker.parcelnet/blob/master/README.md",
     "loglevel": "info",
     "mode": "daemon",
-    "type": "communication",
-    "compact": false,
+    "type": "misc-data",
+    "compact": true,
     "connectionType": "cloud",
     "dataSource": "poll",
     "adminUI": {
@@ -92,16 +48,16 @@
         "js-controller": ">=6.0.11"
       }
     ],
-    "licenseInformation": {
-      "type": "free",
-      "license": "MIT"
-    },
     "globalDependencies": [
       {
         "admin": ">=6.7.17"
       }
     ],
-    "tier": 3
+    "tier": 3,
+    "licenseInformation": {
+      "type": "free",
+      "license": "MIT"
+    }
   },
   "protectedNative": [
     "apiKey"

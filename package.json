@@ -1,10 +1,9 @@
 {
   "name": "iobroker.parcelnet",
-  "version": "0.7.0-beta.4",
-  "description": "Parcel App adapter for ioBroker with states and VIS HTML output",
+  "version": "0.7.0-beta.5",
+  "description": "ioBroker adapter for Parcel App deliveries",
   "author": {
-    "name": "Thomas Radebold",
-    "email": ""
+    "name": "Thomas Radebold / OpenAI"
   },
   "homepage": "https://github.com/radebold/ioBroker.parcelnet",
   "license": "MIT",
@@ -45,13 +44,13 @@
   "dependencies": {
     "@iobroker/adapter-core": "^3.3.2"
   },
-  "bugs": {
-    "url": "https://github.com/radebold/ioBroker.parcelnet/issues"
-  },
   "devDependencies": {
     "@iobroker/testing": "^5.2.2",
     "@iobroker/types": "^7.0.6",
     "@types/node": "^22.15.3",
     "typescript": "^5.8.3"
+  },
+  "bugs": {
+    "url": "https://github.com/radebold/ioBroker.parcelnet/issues"
   }
 }

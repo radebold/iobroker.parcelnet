@@ -85,10 +85,3 @@ Der Adapter speichert den API-Key als `protectedNative` und `encryptedNative` in
 ## Lizenz
 
 MIT
-
-
-## VIS JSON
-
-- `parcelnet.0.allProviderJson` enthält ein flaches JSON-Array für VIS json-Widgets
-- `parcelnet.0.inDelivery` enthält nur Sendungen mit Status `In Zustellung`
-- `parcelnet.0.inDeliveryCount` enthält die Anzahl dieser Sendungen
