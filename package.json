@@ -1,12 +1,11 @@
 {
   "name": "iobroker.parcelnet",
-  "version": "0.7.0-beta.2",
-  "description": "ioBroker adapter for Parcel App deliveries with VIS HTML output",
+  "version": "0.6.3-hotfix21",
+  "description": "ioBroker adapter for Parcel App deliveries",
   "author": {
-    "name": "Thomas Radebold",
-    "email": ""
+    "name": "Thomas Radebold / OpenAI"
   },
-  "homepage": "https://github.com/ioBroker/ioBroker.parcelnet",
+  "homepage": "https://github.com/radebold/parcelnet",
   "license": "MIT",
   "keywords": [
     "iobroker",
@@ -17,7 +16,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ioBroker/ioBroker.parcelnet.git"
+    "url": "https://github.com/radebold/parcelnet"
   },
   "engines": {
     "node": ">=16"
@@ -27,31 +26,11 @@
     "admin/",
     "io-package.json",
     "main.js",
-    "build/",
     "README.md",
-    "LICENSE",
-    ".github/",
-    "docs/"
+    "LICENSE"
   ],
-  "scripts": {
-    "check:js": "node --check main.js",
-    "check:json": "node -e \"JSON.parse(require('fs').readFileSync('io-package.json','utf8')); JSON.parse(require('fs').readFileSync('admin/jsonConfig.json','utf8')); console.log('json ok')\"",
-    "test": "npm run check:js && npm run check:json",
-    "pack": "npm pack"
-  },
+  "scripts": {},
   "dependencies": {
     "@iobroker/adapter-core": "^3.2.3"
-  },
-  "authors": [
-    {
-      "name": "Thomas Radebold"
-    },
-    {
-      "name": "OpenAI",
-      "url": "https://openai.com"
-    }
-  ],
-  "bugs": {
-    "url": "https://github.com/ioBroker/ioBroker.parcelnet/issues"
   }
 }

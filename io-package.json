@@ -1,11 +1,11 @@
 {
   "common": {
     "name": "parcelnet",
-    "version": "0.7.0-beta.1",
+    "version": "0.6.3-hotfix14",
     "news": {
-      "0.7.0-beta.1": {
-        "en": "Public beta preparation: cleaned metadata, improved README, GitHub Actions workflow, beta checklist and current hotfixes included.",
-        "de": "Vorbereitung für öffentliche Beta: bereinigte Metadaten, verbesserte README, GitHub-Actions-Workflow, Beta-Checkliste und aktuelle Hotfixes enthalten."
+      "0.6.3-hotfix14": {
+        "en": "GUI hotfix: removed crashing file upload fields and replaced them with stable path/URL inputs for carrier logos.",
+        "de": "GUI-Hotfix: abstürzende Datei-Upload-Felder entfernt und durch stabile Pfad-/URL-Felder für Carrier-Logos ersetzt."
       }
     },
     "titleLang": {
@@ -17,8 +17,7 @@
       "de": "Liest aktive oder kürzliche Sendungen aus Parcel App und stellt sie als ioBroker-States bereit."
     },
     "authors": [
-      "Thomas Radebold",
-      "OpenAI"
+      "Thomas Radebold / OpenAI"
     ],
     "keywords": [
       "parcel",
@@ -31,11 +30,11 @@
     "main": "main.js",
     "icon": "parcelnet.png",
     "enabled": true,
-    "extIcon": "https://raw.githubusercontent.com/ioBroker/ioBroker.parcelnet/main/admin/parcelnet.png",
-    "readme": "https://github.com/ioBroker/ioBroker.parcelnet/blob/main/README.md",
+    "extIcon": "https://raw.githubusercontent.com/radebold/parcelnet/main/admin/parcelnet.png",
+    "readme": "https://github.com/radebold/parcelnet/blob/main/README.md",
     "loglevel": "info",
     "mode": "daemon",
-    "type": "communication",
+    "type": "misc-data",
     "compact": false,
     "connectionType": "cloud",
     "dataSource": "poll",
@@ -47,8 +46,7 @@
       {
         "js-controller": ">=3.3.0"
       }
-    ],
-    "title": "ParcelNet"
+    ]
   },
   "protectedNative": [
     "apiKey"
@@ -93,5 +91,5 @@
       "native": {}
     }
   ],
-  "version": "0.7.0-beta.2"
+  "version": "0.6.3-hotfix21"
 }

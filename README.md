@@ -1,98 +1,71 @@
+## 0.6.3-hotfix10
+
+- Fix: Adapter startete nicht mehr, weil `ensureFileMetaObject()` fehlte.
+- Datei-Metaobjekt `parcelnet.0.files` wird jetzt sauber angelegt.
+
 # ioBroker.parcelnet
 
-ParcelNet is an ioBroker adapter for the [Parcel App API](https://parcelapp.net/help/api-view-deliveries.html). It polls active or recent deliveries from the Parcel cloud API and exposes them as ioBroker states and ready-to-use HTML output for VIS.
+Ein schlanker ioBroker-Adapter in **TypeScript** für die Parcel-App-API.
 
-## Features
+## Funktionen
 
-- Poll active or recent deliveries from the Parcel API
-- Secure API key in the admin UI
-- Ready-to-use VIS HTML states
-  - `parcelnet.0.vis.html`
-  - `parcelnet.0.vis.htmlCompact`
-- Manual refresh via `parcelnet.0.tools.refreshNow`
-- Per-delivery states below `parcelnet.0.deliveries.list.*`
-- Optional demo view for VIS when the API returns no deliveries
-- Carrier mapping including Amazon Logistics aliases such as `amzlde`
+- Abruf von **aktiven** oder **letzten** Lieferungen über die Parcel-API
+- API-Key bequem über die Admin-Oberfläche konfigurierbar
+- Polling-Intervall frei einstellbar
+- States für:
+  - `deliveries.count`
+  - `deliveries.json`
+  - `deliveries.formatted`
+  - `deliveries.nextEta`
+  - `deliveries.arrivingToday`
+  - `deliveries.list.XX.*`
+  - `vis.html`
+  - `vis.htmlCompact`
+  - `tools.refreshNow`
+- Manueller Refresh über `parcelnet.0.tools.refreshNow`
 
-## Supported Parcel API fields
+## Voraussetzungen
 
-The adapter consumes Parcel delivery objects such as:
-- `carrier_code`
-- `description`
-- `status_code`
-- `tracking_number`
-- `date_expected`
-- `date_expected_end`
-- `timestamp_expected`
-- `timestamp_expected_end`
-- `event`
-- `date`
-- `location`
-- `additional`
-- `extra_information`
+- ioBroker
+- gültiger Parcel API-Key von `web.parcelapp.net`
+- Das Parcel-API-Endpunkt liefert laut offizieller Doku nur gecachte Antworten und ist auf **20 Requests pro Stunde** limitiert. Deshalb erzwingt der Adapter mindestens **3 Minuten** Polling-Abstand.
 
-Reference: [Parcel API – View Deliveries](https://parcelapp.net/help/api-view-deliveries.html)
+## Installation über GitHub
 
-## Installation
+Repository:
+`https://github.com/radebold/parcelnet`
 
-### GitHub / manual beta installation
-
-Until the adapter is listed in the official repository, install it from GitHub:
+Beispiel:
 
 ```bash
-iobroker url https://github.com/ioBroker/ioBroker.parcelnet --host this
+iobroker url https://github.com/radebold/parcelnet --host this
 ```
 
-### Later via official latest repository
+Oder wie gewohnt über die URL-Installation in ioBroker Admin.
 
-After acceptance into the official ioBroker **latest** repository, users can install it directly from the adapter list.
+## Wichtige States
 
-## Configuration
-
-Open the adapter instance and configure:
-
-- **Parcel API key**
-- **Filter mode**: `active` or `recent`
-- **Polling interval**
-- **Request timeout**
-- **VIS sort order**
-- **Demo view when API is empty**
-- **Optional logo paths / URLs**
-
-The Parcel API endpoint is cached and rate-limited. The adapter therefore enforces a minimum polling interval of 3 minutes.
-
-## Important states
-
-### General
+### Übersicht
 - `parcelnet.0.info.connection`
 - `parcelnet.0.info.lastUpdate`
-- `parcelnet.0.info.lastUpdateTs`
-- `parcelnet.0.info.lastSource`
 - `parcelnet.0.info.lastError`
 
-### Delivery overview
+### Lieferungen
 - `parcelnet.0.deliveries.count`
-- `parcelnet.0.deliveries.activeCount`
-- `parcelnet.0.deliveries.inDeliveryCount`
 - `parcelnet.0.deliveries.json`
 - `parcelnet.0.deliveries.formatted`
 - `parcelnet.0.deliveries.nextEta`
 - `parcelnet.0.deliveries.arrivingToday`
 
-### Per delivery
-Example:
-- `parcelnet.0.deliveries.list.01.active`
-- `parcelnet.0.deliveries.list.01.carrierCode`
-- `parcelnet.0.deliveries.list.01.carrierName`
-- `parcelnet.0.deliveries.list.01.carrierIcon`
+### Einzelne Lieferungen
+Für jede Position wird ein Kanal angelegt, z. B.:
+
 - `parcelnet.0.deliveries.list.01.description`
-- `parcelnet.0.deliveries.list.01.statusCode`
 - `parcelnet.0.deliveries.list.01.statusText`
-- `parcelnet.0.deliveries.list.01.event`
-- `parcelnet.0.deliveries.list.01.eventDate`
-- `parcelnet.0.deliveries.list.01.eventAdditional`
 - `parcelnet.0.deliveries.list.01.eta`
-- `parcelnet.0.deliveries.list.01.trackingNumber`
+- `parcelnet.0.deliveries.list.01.event`
+
+Nicht mehr benötigte Slots werden geleert und auf `active = false` gesetzt.
 
 ### VIS
 - `parcelnet.0.vis.html`
@@ -101,63 +74,116 @@ Example:
 ### Tools
 - `parcelnet.0.tools.refreshNow`
 
-## VIS usage
+Zum manuellen Aktualisieren einfach `true` auf `tools.refreshNow` schreiben. Der Adapter setzt den State danach automatisch wieder auf `false`.
 
-For desktop/tablet:
-- bind an HTML/string widget to `parcelnet.0.vis.html`
+## Entwicklung
 
-For mobile:
-- bind an HTML/string widget to `parcelnet.0.vis.htmlCompact`
+```bash
+npm install
+npm run build
+```
 
-## Carrier logos
+## Hinweise
 
-In the current beta state, carrier logos are configured by path or URL in the admin UI. Examples:
+Der Adapter speichert den API-Key als `protectedNative` und `encryptedNative` in der Instanzkonfiguration.
 
-- `/adapter/parcelnet/carriers/dhl.svg`
-- `/vis.0/main/img/parcelnet/amazon.png`
-- `https://example.com/logo.svg`
-
-If no custom logo is configured, the built-in fallback icon is used.
-
-## Development status
-
-This package contains the current beta preparation based on the 0.6.3 hotfix line. The goal is public testing in the official **latest** repository first, then later a move to **stable**.
-
-## Changelog
-
-### 0.7.0-beta.1
-- beta release preparation
-- cleaned metadata for repository submission
-- GitHub Actions workflow added
-- public beta checklist added
-- includes current hotfix level from the 0.6.3 line
-
-### 0.6.3-hotfix21
-- mobile/compact text shifted slightly to the right to avoid overlap with logos
-
-### 0.6.3-hotfix20
-- mobile/compact layout optimization for phones
-
-### 0.6.3-hotfix19
-- cleanup attempt for legacy `files` object
-
-### 0.6.3-hotfix17
-- manual refresh reacts more reliably
-
-### 0.6.3-hotfix16
-- better logo visibility on dark backgrounds
-
-### 0.6.3-hotfix15
-- fixed missing `getDisplayStatus()` method
-
-### 0.6.3-hotfix14
-- event is preferred over generic status text in VIS
-- activeCount corrected
-
-## License
+## Lizenz
 
 MIT
 
 
-## 0.7.0-beta.2
-- Compact-HTML nutzt jetzt den kurzen `statusText` statt langer Event-Texte im Badge.
+## VIS JSON
+
+- `parcelnet.0.allProviderJson` enthält ein flaches JSON-Array für VIS json-Widgets
+- `parcelnet.0.inDelivery` enthält nur Sendungen mit Status `In Zustellung`
+- `parcelnet.0.inDeliveryCount` enthält die Anzahl dieser Sendungen
+
+## VIS-HTML
+
+Für VIS genügt ein HTML-/String-Widget mit einem dieser States:
+
+- `parcelnet.0.vis.html`
+- `parcelnet.0.vis.htmlCompact`
+
+Die HTML-Ansicht ist transparent und für Scrollen innerhalb des Widgets ausgelegt.
+
+## Carrier-Logos per Admin
+
+Im Reiter **Carrier-Logos** kann pro Carrier ein eigenes Logo gewählt werden.
+
+Empfohlener Ablauf:
+
+1. Datei im ioBroker-Dateisystem hochladen, zum Beispiel nach `vis.0 / main / img / parcelnet`
+2. Im Adapter unter **Carrier-Logos** das passende Bild pro Carrier auswählen
+3. Adapter speichern
+
+Unterstützte Formate:
+- PNG
+- SVG
+- JPG/JPEG
+- WEBP
+
+## Demo-Ansicht
+
+Wenn die Parcel-API keine Sendungen liefert, kann optional eine Demo-Ansicht für VIS eingeblendet werden.
+
+Schalter dafür:
+- **Allgemein → Demo-Carrier anzeigen, wenn die API keine Sendungen liefert**
+
+Wichtig:
+- Die Demo erscheint nur in `vis.html` und `vis.htmlCompact`
+- Die echten Lieferstates unter `deliveries.*` bleiben dabei leer
+
+
+## Hotfix 7
+
+Die Carrier-Logos werden jetzt direkt in den eigenen Dateibereich des Adapters hochgeladen:
+
+- Zielordner: `/parcelnet.0/carriers`
+- nicht mehr: `vis.0/main/img/parcelnet`
+
+Das vermeidet Probleme mit Berechtigungen, Pfaden und der Auswahl in der Admin-UI.
+
+
+## 0.6.3-hotfix14
+
+- GUI crash in the carrier logo tab removed
+- direct upload fields replaced by stable text inputs for local paths, adapter paths, VIS paths or HTTPS URLs
+- built-in fallback icons remain available when fields are empty
+
+
+## Hotfix 13
+
+- Carrier-Mapping für Amazon erweitert
+- `amzlde` wird jetzt korrekt als **Amazon** erkannt
+- zusätzliche Amazon-Aliasse ergänzt (`amzl`, `amazonde`)
+
+
+## 0.6.3-hotfix15
+- Fix: `getDisplayStatus is not a function`
+
+
+## 0.6.3-hotfix16
+- VIS: helle Logo-Kachel für bessere Lesbarkeit dunkler Carrier-Logos wie Amazon.
+
+
+## 0.6.3-hotfix17
+- Fix: manueller Refresh reagiert jetzt auch auf UI-Schreibvorgänge mit ack=true.
+- Refresh-State ist lesbar und schreibt einen Logeintrag bei manuellem Trigger.
+
+
+## 0.6.3-hotfix18
+- Bereinigung: unnötiges Objekt `parcelnet.0.files` entfernt.
+- Adapter legt kein `files`-Metaobjekt mehr an und versucht vorhandenes Legacy-Objekt beim Start zu löschen.
+
+
+## 0.6.3-hotfix19
+- Fix: Legacy-Objekt `parcelnet.0.files` wird beim Start rekursiv entfernt.
+
+
+## 0.6.3-hotfix20
+- Mobile/Compact-HTML optimiert: kleineres Logo, kleineres Badge, engeres Padding und saubererer Titelumbruch auf dem Handy.
+
+
+## 0.6.3-hotfix21
+- Mobile/Compact: Textstart einige Pixel nach rechts verschoben, damit Titel nicht mehr am Logo klebt.

@@ -900,7 +900,7 @@ class ParcelNet extends utils.Adapter {
             ? `<div style="padding:${cardPadding};border-radius:14px;border:1px solid rgba(148,163,184,.25);color:#e5e7eb;background:rgba(15,23,42,.18);">Keine Lieferungen vorhanden</div>`
             : items.map((delivery) => {
                 const statusCode = typeof delivery.status_code === "number" ? delivery.status_code : -1;
-                const statusText = compact ? this.statusText(statusCode) : this.getDisplayStatus(delivery);
+                const statusText = this.getDisplayStatus(delivery);
                 const badgeColor = this.statusColor(statusCode);
                 const carrier = this.getCarrierMeta(delivery);
                 const icon = this.getCarrierIcon(delivery);
