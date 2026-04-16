@@ -150,3 +150,10 @@ Das vermeidet Probleme mit Berechtigungen, Pfaden und der Auswahl in der Admin-U
 - GUI crash in the carrier logo tab removed
 - direct upload fields replaced by stable text inputs for local paths, adapter paths, VIS paths or HTTPS URLs
 - built-in fallback icons remain available when fields are empty
+
+
+## Hotfix 13
+
+- Carrier-Mapping für Amazon erweitert
+- `amzlde` wird jetzt korrekt als **Amazon** erkannt
+- zusätzliche Amazon-Aliasse ergänzt (`amzl`, `amazonde`)
