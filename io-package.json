@@ -1,7 +1,7 @@
 {
   "common": {
     "name": "parcelnet",
-    "version": "0.6.3-hotfix6",
+    "version": "0.6.3-hotfix7",
     "news": {
       "0.5.0": {
         "en": "Initial TypeScript adapter version with Parcel API polling, item states, manual refresh and VIS HTML output.",
@@ -36,13 +36,9 @@
         "en": "VIS layout optimized, transparent background, optional demo mode when API is empty, and configurable carrier logos via admin file selection.",
         "de": "VIS-Layout optimiert, transparenter Hintergrund, optionaler Demo-Modus bei leerer API und konfigurierbare Carrier-Logos per Admin-Dateiauswahl."
       },
-      "0.6.3-hotfix4": {
-        "en": "Added VIS sorting options and dedicated count states for active and in-delivery shipments.",
-        "de": "VIS-Sortierung ergänzt und eigene Zähl-States für aktive Sendungen sowie Sendungen in Zustellung hinzugefügt."
-      },
-      "0.6.3-hotfix5": {
-        "en": "Carrier logo fields now expose direct upload options in the adapter UI and keep the per-carrier selection workflow.",
-        "de": "Carrier-Logo-Felder bieten jetzt direkte Upload-Optionen in der Adapter-UI und behalten die Auswahl pro Carrier bei."
+      "0.6.3-hotfix7": {
+        "en": "Upload carrier logos into the adapter file area instead of vis.0 to avoid permission/path issues.",
+        "de": "Carrier-Logos werden jetzt in den eigenen Adapter-Dateibereich statt nach vis.0 hochgeladen, um Berechtigungs-/Pfadprobleme zu vermeiden."
       }
     },
     "titleLang": {
@@ -100,7 +96,7 @@
     "showTrackingNumberInHtml": true,
     "logRawResponse": false,
     "showDemoWhenEmpty": true,
-    "logoFolder": "/vis.0/main/img/parcelnet",
+    "logoFolder": "/parcelnet.0/carriers",
     "carrierLogo_dhl": "",
     "carrierLogo_hermes": "",
     "carrierLogo_dpd": "",
@@ -109,9 +105,7 @@
     "carrierLogo_gls": "",
     "carrierLogo_deutschepost": "",
     "carrierLogo_fedex": "",
-    "carrierLogo_parcel": "",
-    "visSortBy": "expected",
-    "visSortDirection": "asc"
+    "carrierLogo_parcel": ""
   },
   "objects": [],
   "instanceObjects": [

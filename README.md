@@ -130,15 +130,11 @@ Wichtig:
 - Die echten Lieferstates unter `deliveries.*` bleiben dabei leer
 
 
-## VIS sorting / VIS-Sortierung
+## Hotfix 7
 
-In the adapter config you can now choose how the VIS HTML states are sorted: expected delivery, title, carrier or status code, each ascending or descending.
+Die Carrier-Logos werden jetzt direkt in den eigenen Dateibereich des Adapters hochgeladen:
 
-Zusätzlich gibt es jetzt eigene States für Zähler:
+- Zielordner: `/parcelnet.0/carriers`
+- nicht mehr: `vis.0/main/img/parcelnet`
 
-- `parcelnet.0.deliveries.activeCount`
-- `parcelnet.0.deliveries.inDeliveryCount`
-
-
-## 0.6.3-hotfix6
-- Korrigierte Carrier-Logo-Auswahl in der Admin-UI mit `fileSelector` gemäß json-config-Doku (`objectID` + `upload`).
+Das vermeidet Probleme mit Berechtigungen, Pfaden und der Auswahl in der Admin-UI.

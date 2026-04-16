@@ -249,30 +249,6 @@ class ParcelNet extends utils.Adapter {
             },
             native: {},
         });
-        await this.extendObjectAsync("deliveries.activeCount", {
-            type: "state",
-            common: {
-                name: "Anzahl aktiver Lieferungen",
-                type: "number",
-                role: "value",
-                read: true,
-                write: false,
-                def: 0,
-            },
-            native: {},
-        });
-        await this.extendObjectAsync("deliveries.inDeliveryCount", {
-            type: "state",
-            common: {
-                name: "Anzahl Lieferungen in Zustellung",
-                type: "number",
-                role: "value",
-                read: true,
-                write: false,
-                def: 0,
-            },
-            native: {},
-        });
         await this.extendObjectAsync("deliveries.json", {
             type: "state",
             common: {
@@ -393,7 +369,6 @@ class ParcelNet extends utils.Adapter {
             const jsonRows = this.buildJsonRows(deliveries);
             const inDeliveryRows = jsonRows.filter(row => row.isInDelivery);
             await this.setStateAsync("deliveries.count", { val: deliveries.length, ack: true });
-            await this.setStateAsync("deliveries.activeCount", { val: deliveries.length, ack: true });
             await this.setStateAsync("deliveries.json", { val: JSON.stringify(deliveries, null, 2), ack: true });
             await this.setStateAsync("deliveries.formatted", { val: formatted, ack: true });
             await this.setStateAsync("deliveries.nextEta", { val: nextEta, ack: true });
@@ -401,7 +376,6 @@ class ParcelNet extends utils.Adapter {
             await this.setStateAsync("allProviderJson", { val: JSON.stringify(jsonRows), ack: true });
             await this.setStateAsync("inDelivery", { val: JSON.stringify(inDeliveryRows), ack: true });
             await this.setStateAsync("inDeliveryCount", { val: inDeliveryRows.length, ack: true });
-            await this.setStateAsync("deliveries.inDeliveryCount", { val: inDeliveryRows.length, ack: true });
             await this.writeDeliveryChannels(deliveries);
             await this.writeHtml(deliveries);
             const now = new Date();
@@ -526,6 +500,15 @@ class ParcelNet extends utils.Adapter {
             return `/${input.replace(':', '/')}`;
         }
         if (input.startsWith('data:vis.0/')) {
+            return `/${input.substring(5)}`;
+        }
+        if (input.startsWith('parcelnet.0/')) {
+            return `/${input}`;
+        }
+        if (input.startsWith('parcelnet.0:')) {
+            return `/${input.replace(':', '/')}`;
+        }
+        if (input.startsWith('data:parcelnet.0/')) {
             return `/${input.substring(5)}`;
         }
         return input;
@@ -829,37 +812,6 @@ class ParcelNet extends utils.Adapter {
             });
         }
     }
-    sortDeliveriesForVis(deliveries) {
-        const sortBy = typeof this.config?.visSortBy === "string" ? this.config.visSortBy : "expected";
-        const sortDirection = this.config?.visSortDirection === "desc" ? "desc" : "asc";
-        const direction = sortDirection === "desc" ? -1 : 1;
-        const sorted = [...deliveries];
-        const cmp = (a, b) => {
-            let av = "";
-            let bv = "";
-            if (sortBy === "title") {
-                av = String(a.description || "").toLowerCase();
-                bv = String(b.description || "").toLowerCase();
-            }
-            else if (sortBy === "carrier") {
-                av = this.getCarrierMeta(a).name.toLowerCase();
-                bv = this.getCarrierMeta(b).name.toLowerCase();
-            }
-            else if (sortBy === "status") {
-                av = String(typeof a.status_code === "number" ? a.status_code : 999);
-                bv = String(typeof b.status_code === "number" ? b.status_code : 999);
-            }
-            else {
-                av = String(this.getExpectedTimestamp(a) ?? Number.MAX_SAFE_INTEGER);
-                bv = String(this.getExpectedTimestamp(b) ?? Number.MAX_SAFE_INTEGER);
-            }
-            if (av < bv) return -1 * direction;
-            if (av > bv) return 1 * direction;
-            return 0;
-        };
-        sorted.sort(cmp);
-        return sorted;
-    }
     async writeHtml(deliveries) {
         const normal = this.renderHtml(deliveries, false);
         const compact = this.renderHtml(deliveries, true);
@@ -871,8 +823,7 @@ class ParcelNet extends utils.Adapter {
         const showTracking = Boolean(this.config.showTrackingNumberInHtml);
         const usingDemo = deliveries.length === 0 && this.shouldShowDemoWhenEmpty();
         const sourceDeliveries = usingDemo ? this.getDemoDeliveries() : deliveries;
-        const sortedDeliveries = this.sortDeliveriesForVis(sourceDeliveries);
-        const items = sortedDeliveries.slice(0, maxItems);
+        const items = sourceDeliveries.slice(0, maxItems);
         const wrapperPadding = compact ? "8px" : "10px";
         const cardPadding = compact ? "10px 12px" : "12px 14px";
         const titleSize = compact ? "17px" : "19px";

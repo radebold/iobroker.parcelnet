@@ -84,72 +84,6 @@
           "md": 4,
           "lg": 3
         },
-        "visSortBy": {
-          "type": "select",
-          "label": {
-            "en": "VIS sorting",
-            "de": "VIS-Sortierung"
-          },
-          "options": [
-            {
-              "label": {
-                "en": "Expected delivery",
-                "de": "Geplante Lieferung"
-              },
-              "value": "expected"
-            },
-            {
-              "label": {
-                "en": "Title",
-                "de": "Titel"
-              },
-              "value": "title"
-            },
-            {
-              "label": {
-                "en": "Carrier",
-                "de": "Carrier"
-              },
-              "value": "carrier"
-            },
-            {
-              "label": {
-                "en": "Status code",
-                "de": "Statuscode"
-              },
-              "value": "status"
-            }
-          ],
-          "sm": 12,
-          "md": 4,
-          "lg": 3
-        },
-        "visSortDirection": {
-          "type": "select",
-          "label": {
-            "en": "Sort direction",
-            "de": "Sortierreihenfolge"
-          },
-          "options": [
-            {
-              "label": {
-                "en": "Ascending",
-                "de": "Aufsteigend"
-              },
-              "value": "asc"
-            },
-            {
-              "label": {
-                "en": "Descending",
-                "de": "Absteigend"
-              },
-              "value": "desc"
-            }
-          ],
-          "sm": 12,
-          "md": 4,
-          "lg": 3
-        },
         "showTrackingNumberInHtml": {
           "type": "checkbox",
           "label": {
@@ -196,8 +130,8 @@
         "logoInfo": {
           "type": "staticText",
           "text": {
-            "en": "Use the selection field to upload or choose images directly from vis.0/main/img/parcelnet. The upload button is provided by the fileSelector itself.",
-            "de": "Nutze die Auswahlfelder, um Bilder direkt aus vis.0/main/img/parcelnet hochzuladen oder auszuwählen. Der Upload-Button kommt direkt vom fileSelector."
+            "en": "Upload the logo files directly in this tab. The files are now stored in the adapter file area parcelnet.0/carriers instead of vis.0 to avoid permission and size/path issues.",
+            "de": "Lade die Logo-Dateien direkt in diesem Reiter hoch. Die Dateien werden jetzt im Adapter-Dateibereich parcelnet.0/carriers statt in vis.0 gespeichert, um Berechtigungs- sowie Pfadprobleme zu vermeiden."
           },
           "sm": 12,
           "md": 12,
@@ -210,13 +144,15 @@
             "de": "Logo-Ordner"
           },
           "help": {
-            "en": "Target folder for uploaded carrier logos. Recommended: /vis.0/main/img/parcelnet",
-            "de": "Zielordner für hochgeladene Carrier-Logos. Empfohlen: /vis.0/main/img/parcelnet"
+            "en": "Default target is /parcelnet.0/carriers. This is the adapter's own file area.",
+            "de": "Standard-Ziel ist /parcelnet.0/carriers. Das ist der eigene Dateibereich des Adapters."
           },
           "sm": 12,
           "md": 8,
           "lg": 6,
-          "hidden": true
+          "disabled": true,
+          "hidden": false,
+          "default": "/parcelnet.0/carriers"
         },
         "carrierLogo_parcel": {
           "type": "fileSelector",
@@ -227,20 +163,15 @@
           "sm": 12,
           "md": 6,
           "lg": 4,
-          "pattern": "main/img/parcelnet/*.*",
+          "root": "dataFiles",
+          "folder": "data:parcelnet.0/carriers",
+          "allowUpload": true,
+          "allowCreateFolder": true,
+          "pattern": "(?i).+\\.(png|svg|jpg|jpeg|webp)$",
           "help": {
-            "en": "Upload or select an image from vis.0/main/img/parcelnet. Requires Admin 6 and vis.0.",
-            "de": "Bild aus vis.0/main/img/parcelnet hochladen oder auswählen. Benötigt Admin 6 und vis.0."
-          },
-          "objectID": "vis.0",
-          "fileTypes": "image",
-          "upload": "main/img/parcelnet",
-          "refresh": true,
-          "delete": false,
-          "noNone": false,
-          "noSize": true,
-          "withFolder": false,
-          "maxSize": 2048
+            "en": "Upload or select a logo from the adapter file area /parcelnet.0/carriers.",
+            "de": "Logo direkt im Adapter-Dateibereich /parcelnet.0/carriers hochladen oder auswählen."
+          }
         },
         "carrierLogo_dhl": {
           "type": "fileSelector",
@@ -251,20 +182,15 @@
           "sm": 12,
           "md": 6,
           "lg": 4,
-          "pattern": "main/img/parcelnet/*.*",
+          "root": "dataFiles",
+          "folder": "data:parcelnet.0/carriers",
+          "allowUpload": true,
+          "pattern": "(?i).+\\.(png|svg|jpg|jpeg|webp)$",
+          "allowCreateFolder": true,
           "help": {
-            "en": "Upload or select an image from vis.0/main/img/parcelnet. Requires Admin 6 and vis.0.",
-            "de": "Bild aus vis.0/main/img/parcelnet hochladen oder auswählen. Benötigt Admin 6 und vis.0."
-          },
-          "objectID": "vis.0",
-          "fileTypes": "image",
-          "upload": "main/img/parcelnet",
-          "refresh": true,
-          "delete": false,
-          "noNone": false,
-          "noSize": true,
-          "withFolder": false,
-          "maxSize": 2048
+            "en": "Upload or select a logo from the adapter file area /parcelnet.0/carriers.",
+            "de": "Logo direkt im Adapter-Dateibereich /parcelnet.0/carriers hochladen oder auswählen."
+          }
         },
         "carrierLogo_hermes": {
           "type": "fileSelector",
@@ -275,20 +201,15 @@
           "sm": 12,
           "md": 6,
           "lg": 4,
-          "pattern": "main/img/parcelnet/*.*",
+          "root": "dataFiles",
+          "folder": "data:parcelnet.0/carriers",
+          "allowUpload": true,
+          "pattern": "(?i).+\\.(png|svg|jpg|jpeg|webp)$",
+          "allowCreateFolder": true,
           "help": {
-            "en": "Upload or select an image from vis.0/main/img/parcelnet. Requires Admin 6 and vis.0.",
-            "de": "Bild aus vis.0/main/img/parcelnet hochladen oder auswählen. Benötigt Admin 6 und vis.0."
-          },
-          "objectID": "vis.0",
-          "fileTypes": "image",
-          "upload": "main/img/parcelnet",
-          "refresh": true,
-          "delete": false,
-          "noNone": false,
-          "noSize": true,
-          "withFolder": false,
-          "maxSize": 2048
+            "en": "Upload or select a logo from the adapter file area /parcelnet.0/carriers.",
+            "de": "Logo direkt im Adapter-Dateibereich /parcelnet.0/carriers hochladen oder auswählen."
+          }
         },
         "carrierLogo_dpd": {
           "type": "fileSelector",
@@ -299,20 +220,15 @@
           "sm": 12,
           "md": 6,
           "lg": 4,
-          "pattern": "main/img/parcelnet/*.*",
+          "root": "dataFiles",
+          "folder": "data:parcelnet.0/carriers",
+          "allowUpload": true,
+          "pattern": "(?i).+\\.(png|svg|jpg|jpeg|webp)$",
+          "allowCreateFolder": true,
           "help": {
-            "en": "Upload or select an image from vis.0/main/img/parcelnet. Requires Admin 6 and vis.0.",
-            "de": "Bild aus vis.0/main/img/parcelnet hochladen oder auswählen. Benötigt Admin 6 und vis.0."
-          },
-          "objectID": "vis.0",
-          "fileTypes": "image",
-          "upload": "main/img/parcelnet",
-          "refresh": true,
-          "delete": false,
-          "noNone": false,
-          "noSize": true,
-          "withFolder": false,
-          "maxSize": 2048
+            "en": "Upload or select a logo from the adapter file area /parcelnet.0/carriers.",
+            "de": "Logo direkt im Adapter-Dateibereich /parcelnet.0/carriers hochladen oder auswählen."
+          }
         },
         "carrierLogo_ups": {
           "type": "fileSelector",
@@ -323,20 +239,15 @@
           "sm": 12,
           "md": 6,
           "lg": 4,
-          "pattern": "main/img/parcelnet/*.*",
+          "root": "dataFiles",
+          "folder": "data:parcelnet.0/carriers",
+          "allowUpload": true,
+          "pattern": "(?i).+\\.(png|svg|jpg|jpeg|webp)$",
+          "allowCreateFolder": true,
           "help": {
-            "en": "Upload or select an image from vis.0/main/img/parcelnet. Requires Admin 6 and vis.0.",
-            "de": "Bild aus vis.0/main/img/parcelnet hochladen oder auswählen. Benötigt Admin 6 und vis.0."
-          },
-          "objectID": "vis.0",
-          "fileTypes": "image",
-          "upload": "main/img/parcelnet",
-          "refresh": true,
-          "delete": false,
-          "noNone": false,
-          "noSize": true,
-          "withFolder": false,
-          "maxSize": 2048
+            "en": "Upload or select a logo from the adapter file area /parcelnet.0/carriers.",
+            "de": "Logo direkt im Adapter-Dateibereich /parcelnet.0/carriers hochladen oder auswählen."
+          }
         },
         "carrierLogo_amazon": {
           "type": "fileSelector",
@@ -347,20 +258,15 @@
           "sm": 12,
           "md": 6,
           "lg": 4,
-          "pattern": "main/img/parcelnet/*.*",
+          "root": "dataFiles",
+          "folder": "data:parcelnet.0/carriers",
+          "allowUpload": true,
+          "pattern": "(?i).+\\.(png|svg|jpg|jpeg|webp)$",
+          "allowCreateFolder": true,
           "help": {
-            "en": "Upload or select an image from vis.0/main/img/parcelnet. Requires Admin 6 and vis.0.",
-            "de": "Bild aus vis.0/main/img/parcelnet hochladen oder auswählen. Benötigt Admin 6 und vis.0."
-          },
-          "objectID": "vis.0",
-          "fileTypes": "image",
-          "upload": "main/img/parcelnet",
-          "refresh": true,
-          "delete": false,
-          "noNone": false,
-          "noSize": true,
-          "withFolder": false,
-          "maxSize": 2048
+            "en": "Upload or select a logo from the adapter file area /parcelnet.0/carriers.",
+            "de": "Logo direkt im Adapter-Dateibereich /parcelnet.0/carriers hochladen oder auswählen."
+          }
         },
         "carrierLogo_gls": {
           "type": "fileSelector",
@@ -371,20 +277,15 @@
           "sm": 12,
           "md": 6,
           "lg": 4,
-          "pattern": "main/img/parcelnet/*.*",
+          "root": "dataFiles",
+          "folder": "data:parcelnet.0/carriers",
+          "allowUpload": true,
+          "pattern": "(?i).+\\.(png|svg|jpg|jpeg|webp)$",
+          "allowCreateFolder": true,
           "help": {
-            "en": "Upload or select an image from vis.0/main/img/parcelnet. Requires Admin 6 and vis.0.",
-            "de": "Bild aus vis.0/main/img/parcelnet hochladen oder auswählen. Benötigt Admin 6 und vis.0."
-          },
-          "objectID": "vis.0",
-          "fileTypes": "image",
-          "upload": "main/img/parcelnet",
-          "refresh": true,
-          "delete": false,
-          "noNone": false,
-          "noSize": true,
-          "withFolder": false,
-          "maxSize": 2048
+            "en": "Upload or select a logo from the adapter file area /parcelnet.0/carriers.",
+            "de": "Logo direkt im Adapter-Dateibereich /parcelnet.0/carriers hochladen oder auswählen."
+          }
         },
         "carrierLogo_deutschepost": {
           "type": "fileSelector",
@@ -395,20 +296,15 @@
           "sm": 12,
           "md": 6,
           "lg": 4,
-          "pattern": "main/img/parcelnet/*.*",
+          "root": "dataFiles",
+          "folder": "data:parcelnet.0/carriers",
+          "allowUpload": true,
+          "pattern": "(?i).+\\.(png|svg|jpg|jpeg|webp)$",
+          "allowCreateFolder": true,
           "help": {
-            "en": "Upload or select an image from vis.0/main/img/parcelnet. Requires Admin 6 and vis.0.",
-            "de": "Bild aus vis.0/main/img/parcelnet hochladen oder auswählen. Benötigt Admin 6 und vis.0."
-          },
-          "objectID": "vis.0",
-          "fileTypes": "image",
-          "upload": "main/img/parcelnet",
-          "refresh": true,
-          "delete": false,
-          "noNone": false,
-          "noSize": true,
-          "withFolder": false,
-          "maxSize": 2048
+            "en": "Upload or select a logo from the adapter file area /parcelnet.0/carriers.",
+            "de": "Logo direkt im Adapter-Dateibereich /parcelnet.0/carriers hochladen oder auswählen."
+          }
         },
         "carrierLogo_fedex": {
           "type": "fileSelector",
@@ -419,20 +315,15 @@
           "sm": 12,
           "md": 6,
           "lg": 4,
-          "pattern": "main/img/parcelnet/*.*",
+          "root": "dataFiles",
+          "folder": "data:parcelnet.0/carriers",
+          "allowUpload": true,
+          "pattern": "(?i).+\\.(png|svg|jpg|jpeg|webp)$",
+          "allowCreateFolder": true,
           "help": {
-            "en": "Upload or select an image from vis.0/main/img/parcelnet. Requires Admin 6 and vis.0.",
-            "de": "Bild aus vis.0/main/img/parcelnet hochladen oder auswählen. Benötigt Admin 6 und vis.0."
-          },
-          "objectID": "vis.0",
-          "fileTypes": "image",
-          "upload": "main/img/parcelnet",
-          "refresh": true,
-          "delete": false,
-          "noNone": false,
-          "noSize": true,
-          "withFolder": false,
-          "maxSize": 2048
+            "en": "Upload or select a logo from the adapter file area /parcelnet.0/carriers.",
+            "de": "Logo direkt im Adapter-Dateibereich /parcelnet.0/carriers hochladen oder auswählen."
+          }
         }
       }
     }
