@@ -1,54 +1,82 @@
 {
   "common": {
     "name": "parcelnet",
-    "version": "0.7.0-beta.1",
+    "version": "0.7.0-beta.3",
     "news": {
-      "0.7.0-beta.1": {
-        "en": "Public beta preparation: cleaned metadata, improved README, GitHub Actions workflow, beta checklist and current hotfixes included.",
-        "de": "Vorbereitung für öffentliche Beta: bereinigte Metadaten, verbesserte README, GitHub-Actions-Workflow, Beta-Checkliste und aktuelle Hotfixes enthalten."
+      "0.5.0": {
+        "en": "Initial TypeScript adapter version with Parcel API polling, item states, manual refresh and VIS HTML output.",
+        "de": "Erste TypeScript-Adapterversion mit Parcel-API-Polling, Einzelzuständen, manuellem Refresh und VIS-HTML-Ausgabe."
+      },
+      "0.7.0-beta.3": {
+        "en": "Repository checker fixes: updated metadata, dependencies and jsonConfig sizing.",
+        "de": "Repository-Checker-Fixes: Metadaten, Abhängigkeiten und jsonConfig-Größen aktualisiert."
       }
     },
     "titleLang": {
       "en": "ParcelNet",
-      "de": "ParcelNet"
+      "de": "ParcelNet",
+      "ru": "ParcelNet",
+      "pt": "ParcelNet",
+      "nl": "ParcelNet",
+      "fr": "ParcelNet",
+      "it": "ParcelNet",
+      "es": "ParcelNet",
+      "pl": "ParcelNet",
+      "uk": "ParcelNet",
+      "zh-cn": "ParcelNet"
     },
     "desc": {
       "en": "Reads active or recent deliveries from Parcel App and exposes them as ioBroker states.",
-      "de": "Liest aktive oder kürzliche Sendungen aus Parcel App und stellt sie als ioBroker-States bereit."
+      "de": "Liest aktive oder kürzliche Sendungen aus Parcel App und stellt sie als ioBroker-States bereit.",
+      "ru": "Считывает активные или недавние отправления из Parcel App и предоставляет их как состояния ioBroker.",
+      "pt": "Lê entregas ativas ou recentes do Parcel App e as disponibiliza como estados no ioBroker.",
+      "nl": "Leest actieve of recente zendingen uit Parcel App en stelt ze beschikbaar als ioBroker-statussen.",
+      "fr": "Lit les livraisons actives ou récentes de Parcel App et les expose comme états ioBroker.",
+      "it": "Legge le spedizioni attive o recenti da Parcel App e le espone come stati di ioBroker.",
+      "es": "Lee entregas activas o recientes de Parcel App y las expone como estados de ioBroker.",
+      "pl": "Odczytuje aktywne lub ostatnie przesyłki z Parcel App i udostępnia je jako stany ioBroker.",
+      "uk": "Зчитує активні або нещодавні відправлення з Parcel App і надає їх як стани ioBroker.",
+      "zh-cn": "从 Parcel App 读取活动或最近的包裹，并将其作为 ioBroker 状态提供。"
     },
     "authors": [
-      "Thomas Radebold",
-      "OpenAI"
+      "Thomas Radebold"
     ],
     "keywords": [
+      "ioBroker",
       "parcel",
       "deliveries",
       "tracking",
       "logistics"
     ],
-    "license": "MIT",
     "platform": "Javascript/Node.js",
-    "main": "main.js",
     "icon": "parcelnet.png",
     "enabled": true,
-    "extIcon": "https://raw.githubusercontent.com/ioBroker/ioBroker.parcelnet/main/admin/parcelnet.png",
-    "readme": "https://github.com/ioBroker/ioBroker.parcelnet/blob/main/README.md",
+    "extIcon": "https://raw.githubusercontent.com/radebold/ioBroker.parcelnet/master/admin/parcelnet.png",
+    "readme": "https://github.com/radebold/ioBroker.parcelnet/blob/master/README.md",
     "loglevel": "info",
     "mode": "daemon",
-    "type": "communication",
-    "compact": false,
+    "type": "misc-data",
+    "compact": true,
     "connectionType": "cloud",
     "dataSource": "poll",
-    "materialize": true,
     "adminUI": {
       "config": "json"
     },
     "dependencies": [
       {
-        "js-controller": ">=3.3.0"
+        "js-controller": ">=6.0.11"
       }
     ],
-    "title": "ParcelNet"
+    "licenseInformation": {
+      "type": "free",
+      "license": "MIT"
+    },
+    "globalDependencies": [
+      {
+        "admin": ">=6.7.17"
+      }
+    ],
+    "tier": 3
   },
   "protectedNative": [
     "apiKey"
@@ -63,19 +91,7 @@
     "requestTimeoutMs": 15000,
     "maxItemsInHtml": 10,
     "showTrackingNumberInHtml": true,
-    "logRawResponse": false,
-    "showDemoWhenEmpty": true,
-    "logoFolder": "parcelnet.%INSTANCE%.files/carriers",
-    "carrierLogo_dhl": "",
-    "carrierLogo_hermes": "",
-    "carrierLogo_dpd": "",
-    "carrierLogo_ups": "",
-    "carrierLogo_amazon": "",
-    "carrierLogo_gls": "",
-    "carrierLogo_deutschepost": "",
-    "carrierLogo_fedex": "",
-    "carrierLogo_parcel": "",
-    "_uiHotfix": "carrier-logo-text-inputs"
+    "logRawResponse": false
   },
   "objects": [],
   "instanceObjects": [
@@ -92,6 +108,5 @@
       },
       "native": {}
     }
-  ],
-  "version": "0.7.0-beta.2"
+  ]
 }

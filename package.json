@@ -1,14 +1,14 @@
 {
   "name": "iobroker.parcelnet",
-  "version": "0.7.0-beta.2",
-  "description": "ioBroker adapter for Parcel App deliveries with VIS HTML output",
+  "version": "0.7.0-beta.3",
+  "description": "Parcel App adapter for ioBroker with states and VIS HTML output",
   "author": {
-    "name": "Thomas Radebold",
-    "email": ""
+    "name": "Thomas Radebold / OpenAI"
   },
-  "homepage": "https://github.com/ioBroker/ioBroker.parcelnet",
+  "homepage": "https://github.com/radebold/ioBroker.parcelnet",
   "license": "MIT",
   "keywords": [
+    "ioBroker",
     "iobroker",
     "parcel",
     "delivery",
@@ -17,41 +17,38 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ioBroker/ioBroker.parcelnet.git"
+    "url": "git+https://github.com/radebold/ioBroker.parcelnet.git"
   },
   "engines": {
-    "node": ">=16"
+    "node": ">=18"
   },
   "main": "main.js",
   "files": [
     "admin/",
+    "build/",
+    "src/",
     "io-package.json",
     "main.js",
-    "build/",
     "README.md",
     "LICENSE",
-    ".github/",
-    "docs/"
+    "tsconfig.json"
   ],
   "scripts": {
-    "check:js": "node --check main.js",
-    "check:json": "node -e \"JSON.parse(require('fs').readFileSync('io-package.json','utf8')); JSON.parse(require('fs').readFileSync('admin/jsonConfig.json','utf8')); console.log('json ok')\"",
-    "test": "npm run check:js && npm run check:json",
-    "pack": "npm pack"
+    "build": "tsc -p tsconfig.json",
+    "clean": "node -e \"require('fs').rmSync('build', { recursive: true, force: true });\"",
+    "prepare": "npm run build",
+    "test": "npm run check:js && npm run check:json"
   },
   "dependencies": {
-    "@iobroker/adapter-core": "^3.2.3"
+    "@iobroker/adapter-core": "^3.3.2"
   },
-  "authors": [
-    {
-      "name": "Thomas Radebold"
-    },
-    {
-      "name": "OpenAI",
-      "url": "https://openai.com"
-    }
-  ],
+  "devDependencies": {
+    "@iobroker/testing": "^5.2.2",
+    "@iobroker/types": "^7.0.6",
+    "@types/node": "^22.15.3",
+    "typescript": "^5.8.3"
+  },
   "bugs": {
-    "url": "https://github.com/ioBroker/ioBroker.parcelnet/issues"
+    "url": "https://github.com/radebold/ioBroker.parcelnet/issues"
   }
 }

@@ -58,19 +58,6 @@ class ParcelNet extends utils.Adapter {
         this.on("unload", this.onUnload.bind(this));
     }
 
-
-
-    private async ensureFileMetaObject(): Promise<void> {
-        await this.setObjectNotExistsAsync("files", {
-            type: "meta",
-            common: {
-                name: "ParcelNet uploaded files",
-                type: "meta.user",
-            },
-            native: {},
-        });
-    }
-
     private async onReady(): Promise<void> {
         await this.createObjects();
         this.subscribeStates("tools.refreshNow");

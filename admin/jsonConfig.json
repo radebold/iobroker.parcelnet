@@ -15,12 +15,14 @@
             "de": "Parcel API-Key"
           },
           "help": {
-            "en": "Create the key at web.parcelapp.net.",
-            "de": "Den Schlüssel erzeugst du unter web.parcelapp.net."
+            "en": "Create the key at web.parcelapp.net. It is stored as encryptedNative in io-package.json.",
+            "de": "Den Schlüssel erzeugst du unter web.parcelapp.net. Er wird als encryptedNative im io-package.json gespeichert."
           },
           "sm": 12,
           "md": 8,
-          "lg": 6
+          "lg": 6,
+          "xs": 12,
+          "xl": 6
         },
         "filterMode": {
           "type": "select",
@@ -46,7 +48,9 @@
           ],
           "sm": 12,
           "md": 4,
-          "lg": 3
+          "lg": 3,
+          "xs": 12,
+          "xl": 3
         },
         "pollIntervalMinutes": {
           "type": "number",
@@ -54,11 +58,17 @@
             "en": "Polling interval (minutes)",
             "de": "Polling-Intervall (Minuten)"
           },
+          "help": {
+            "en": "Parcel documents a rate limit of 20 requests per hour. The adapter enforces a minimum of 3 minutes.",
+            "de": "Parcel dokumentiert ein Limit von 20 Requests pro Stunde. Der Adapter erzwingt daher mindestens 3 Minuten."
+          },
           "min": 3,
           "step": 1,
           "sm": 12,
           "md": 4,
-          "lg": 3
+          "lg": 3,
+          "xs": 12,
+          "xl": 3
         },
         "requestTimeoutMs": {
           "type": "number",
@@ -70,7 +80,9 @@
           "step": 1000,
           "sm": 12,
           "md": 4,
-          "lg": 3
+          "lg": 3,
+          "xs": 12,
+          "xl": 3
         },
         "maxItemsInHtml": {
           "type": "number",
@@ -82,7 +94,9 @@
           "step": 1,
           "sm": 12,
           "md": 4,
-          "lg": 3
+          "lg": 3,
+          "xs": 12,
+          "xl": 3
         },
         "showTrackingNumberInHtml": {
           "type": "checkbox",
@@ -92,21 +106,9 @@
           },
           "sm": 12,
           "md": 4,
-          "lg": 3
-        },
-        "showDemoWhenEmpty": {
-          "type": "checkbox",
-          "label": {
-            "en": "Show demo carriers when API returns no deliveries",
-            "de": "Demo-Carrier anzeigen, wenn die API keine Sendungen liefert"
-          },
-          "help": {
-            "en": "Only affects the VIS HTML states. Real delivery states stay empty.",
-            "de": "Betrifft nur die VIS-HTML-States. Echte Liefer-States bleiben leer."
-          },
-          "sm": 12,
-          "md": 8,
-          "lg": 6
+          "lg": 3,
+          "xs": 12,
+          "xl": 3
         },
         "logRawResponse": {
           "type": "checkbox",
@@ -116,189 +118,9 @@
           },
           "sm": 12,
           "md": 4,
-          "lg": 3
-        }
-      }
-    },
-    "carrierTab": {
-      "type": "panel",
-      "label": {
-        "en": "Carrier logos",
-        "de": "Carrier-Logos"
-      },
-      "items": {
-        "logoInfo": {
-          "type": "staticText",
-          "text": {
-            "en": "The direct upload field is disabled in this hotfix because it crashes in some Admin versions. Please upload files via the ioBroker file manager and paste the resulting path here, for example /adapter/parcelnet/carriers/dhl.svg or /vis.0/main/img/dhl.png.",
-            "de": "Das direkte Upload-Feld ist in diesem Hotfix deaktiviert, weil es in manchen Admin-Versionen abstürzt. Bitte Dateien über den ioBroker-Dateimanager hochladen und den resultierenden Pfad hier eintragen, z. B. /adapter/parcelnet/carriers/dhl.svg oder /vis.0/main/img/dhl.png."
-          },
-          "sm": 12,
-          "md": 12,
-          "lg": 12
-        },
-        "logoFolder": {
-          "type": "staticText",
-          "text": {
-            "en": "Supported paths: adapter file paths, VIS file paths or external HTTPS URLs.",
-            "de": "Unterstützte Pfade: Adapter-Dateipfade, VIS-Dateipfade oder externe HTTPS-URLs."
-          },
-          "sm": 12,
-          "md": 12,
-          "lg": 12
-        },
-        "carrierLogo_parcel": {
-          "type": "text",
-          "label": {
-            "en": "Default / fallback logo",
-            "de": "Standard-/Fallback-Logo"
-          },
-          "help": {
-            "en": "Path or URL to the logo image. Leave empty to use the built-in fallback.",
-            "de": "Pfad oder URL zum Logobild. Leer lassen, um das eingebaute Fallback zu verwenden."
-          },
-          "placeholder": "/adapter/parcelnet/carriers/parcel.svg",
-          "default": "",
-          "trim": true,
-          "sm": 12,
-          "md": 6,
-          "lg": 4
-        },
-        "carrierLogo_dhl": {
-          "type": "text",
-          "label": {
-            "en": "DHL logo",
-            "de": "DHL-Logo"
-          },
-          "help": {
-            "en": "Path or URL to the logo image. Leave empty to use the built-in fallback.",
-            "de": "Pfad oder URL zum Logobild. Leer lassen, um das eingebaute Fallback zu verwenden."
-          },
-          "placeholder": "/adapter/parcelnet/carriers/dhl.svg",
-          "default": "",
-          "trim": true,
-          "sm": 12,
-          "md": 6,
-          "lg": 4
-        },
-        "carrierLogo_hermes": {
-          "type": "text",
-          "label": {
-            "en": "Hermes logo",
-            "de": "Hermes-Logo"
-          },
-          "help": {
-            "en": "Path or URL to the logo image. Leave empty to use the built-in fallback.",
-            "de": "Pfad oder URL zum Logobild. Leer lassen, um das eingebaute Fallback zu verwenden."
-          },
-          "placeholder": "/adapter/parcelnet/carriers/hermes.svg",
-          "default": "",
-          "trim": true,
-          "sm": 12,
-          "md": 6,
-          "lg": 4
-        },
-        "carrierLogo_dpd": {
-          "type": "text",
-          "label": {
-            "en": "DPD logo",
-            "de": "DPD-Logo"
-          },
-          "help": {
-            "en": "Path or URL to the logo image. Leave empty to use the built-in fallback.",
-            "de": "Pfad oder URL zum Logobild. Leer lassen, um das eingebaute Fallback zu verwenden."
-          },
-          "placeholder": "/adapter/parcelnet/carriers/dpd.svg",
-          "default": "",
-          "trim": true,
-          "sm": 12,
-          "md": 6,
-          "lg": 4
-        },
-        "carrierLogo_ups": {
-          "type": "text",
-          "label": {
-            "en": "UPS logo",
-            "de": "UPS-Logo"
-          },
-          "help": {
-            "en": "Path or URL to the logo image. Leave empty to use the built-in fallback.",
-            "de": "Pfad oder URL zum Logobild. Leer lassen, um das eingebaute Fallback zu verwenden."
-          },
-          "placeholder": "/adapter/parcelnet/carriers/ups.svg",
-          "default": "",
-          "trim": true,
-          "sm": 12,
-          "md": 6,
-          "lg": 4
-        },
-        "carrierLogo_amazon": {
-          "type": "text",
-          "label": {
-            "en": "Amazon logo",
-            "de": "Amazon-Logo"
-          },
-          "help": {
-            "en": "Path or URL to the logo image. Leave empty to use the built-in fallback.",
-            "de": "Pfad oder URL zum Logobild. Leer lassen, um das eingebaute Fallback zu verwenden."
-          },
-          "placeholder": "/adapter/parcelnet/carriers/amazon.svg",
-          "default": "",
-          "trim": true,
-          "sm": 12,
-          "md": 6,
-          "lg": 4
-        },
-        "carrierLogo_gls": {
-          "type": "text",
-          "label": {
-            "en": "GLS logo",
-            "de": "GLS-Logo"
-          },
-          "help": {
-            "en": "Path or URL to the logo image. Leave empty to use the built-in fallback.",
-            "de": "Pfad oder URL zum Logobild. Leer lassen, um das eingebaute Fallback zu verwenden."
-          },
-          "placeholder": "/adapter/parcelnet/carriers/gls.svg",
-          "default": "",
-          "trim": true,
-          "sm": 12,
-          "md": 6,
-          "lg": 4
-        },
-        "carrierLogo_deutschepost": {
-          "type": "text",
-          "label": {
-            "en": "Deutsche Post logo",
-            "de": "Deutsche-Post-Logo"
-          },
-          "help": {
-            "en": "Path or URL to the logo image. Leave empty to use the built-in fallback.",
-            "de": "Pfad oder URL zum Logobild. Leer lassen, um das eingebaute Fallback zu verwenden."
-          },
-          "placeholder": "/adapter/parcelnet/carriers/deutschepost.svg",
-          "default": "",
-          "trim": true,
-          "sm": 12,
-          "md": 6,
-          "lg": 4
-        },
-        "carrierLogo_fedex": {
-          "type": "text",
-          "label": {
-            "en": "FedEx logo",
-            "de": "FedEx-Logo"
-          },
-          "help": {
-            "en": "Path or URL to the logo image. Leave empty to use the built-in fallback.",
-            "de": "Pfad oder URL zum Logobild. Leer lassen, um das eingebaute Fallback zu verwenden."
-          },
-          "placeholder": "/adapter/parcelnet/carriers/fedex.svg",
-          "default": "",
-          "trim": true,
-          "sm": 12,
-          "md": 6,
-          "lg": 4
+          "lg": 3,
+          "xs": 12,
+          "xl": 3
         }
       }
     }
