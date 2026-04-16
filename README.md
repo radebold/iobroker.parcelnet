@@ -1,4 +1,4 @@
-## 0.6.3-hotfix9
+## 0.6.3-hotfix10
 
 - Fix: Adapter startete nicht mehr, weil `ensureFileMetaObject()` fehlte.
 - Datei-Metaobjekt `parcelnet.0.files` wird jetzt sauber angelegt.

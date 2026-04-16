@@ -1,7 +1,7 @@
 {
   "common": {
     "name": "parcelnet",
-    "version": "0.6.3-hotfix9",
+    "version": "0.6.3-hotfix10",
     "news": {
       "0.5.0": {
         "en": "Initial TypeScript adapter version with Parcel API polling, item states, manual refresh and VIS HTML output.",
@@ -98,7 +98,7 @@
     "showTrackingNumberInHtml": true,
     "logRawResponse": false,
     "showDemoWhenEmpty": true,
-    "logoFolder": "/parcelnet.0/carriers",
+    "logoFolder": "parcelnet.%INSTANCE%.files/carriers",
     "carrierLogo_dhl": "",
     "carrierLogo_hermes": "",
     "carrierLogo_dpd": "",

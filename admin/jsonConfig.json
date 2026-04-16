@@ -138,24 +138,17 @@
           "lg": 12
         },
         "logoFolder": {
-          "type": "text",
-          "label": {
-            "en": "Logo folder",
-            "de": "Logo-Ordner"
-          },
-          "help": {
-            "en": "Target folder for uploads: parcelnet.%INSTANCE%.files/carriers",
-            "de": "Zielordner für Uploads: parcelnet.%INSTANCE%.files/carriers"
+          "type": "staticText",
+          "text": {
+            "en": "Upload target: parcelnet.%INSTANCE%.files/carriers",
+            "de": "Upload-Ziel: parcelnet.%INSTANCE%.files/carriers"
           },
           "sm": 12,
           "md": 8,
-          "lg": 6,
-          "disabled": true,
-          "hidden": false,
-          "default": "parcelnet.%INSTANCE%.files/carriers"
+          "lg": 6
         },
         "carrierLogo_parcel": {
-          "type": "fileSelector",
+          "type": "file",
           "label": {
             "en": "Default / fallback logo",
             "de": "Standard-/Fallback-Logo"
@@ -163,21 +156,28 @@
           "sm": 12,
           "md": 6,
           "lg": 4,
-          "pattern": "carriers/*.*",
+          "limitPath": "parcelnet.%INSTANCE%.files/carriers",
+          "filterFiles": [
+            "png",
+            "svg",
+            "jpg",
+            "jpeg",
+            "gif",
+            "webp"
+          ],
+          "allowUpload": true,
+          "allowDownload": true,
+          "allowCreateFolder": false,
+          "allowView": true,
+          "showToolbar": true,
+          "trim": true,
           "help": {
-            "en": "Upload or select an image in the adapter file area parcelnet.%INSTANCE%.files/carriers.",
-            "de": "Bild direkt im Adapter-Dateibereich parcelnet.%INSTANCE%.files/carriers hochladen oder auswählen."
-          },
-          "objectID": "parcelnet.%INSTANCE%.files",
-          "upload": "carriers",
-          "refresh": true,
-          "delete": true,
-          "withFolder": true,
-          "fileTypes": "image",
-          "maxSize": 2000000
+            "en": "Select or upload an image directly in the adapter file area under parcelnet.%INSTANCE%.files/carriers.",
+            "de": "Bild direkt im Adapter-Dateibereich unter parcelnet.%INSTANCE%.files/carriers auswählen oder hochladen."
+          }
         },
         "carrierLogo_dhl": {
-          "type": "fileSelector",
+          "type": "file",
           "label": {
             "en": "DHL logo",
             "de": "DHL-Logo"
@@ -185,21 +185,28 @@
           "sm": 12,
           "md": 6,
           "lg": 4,
-          "pattern": "carriers/*.*",
+          "limitPath": "parcelnet.%INSTANCE%.files/carriers",
+          "filterFiles": [
+            "png",
+            "svg",
+            "jpg",
+            "jpeg",
+            "gif",
+            "webp"
+          ],
+          "allowUpload": true,
+          "allowDownload": true,
+          "allowCreateFolder": false,
+          "allowView": true,
+          "showToolbar": true,
+          "trim": true,
           "help": {
-            "en": "Upload or select an image in the adapter file area parcelnet.%INSTANCE%.files/carriers.",
-            "de": "Bild direkt im Adapter-Dateibereich parcelnet.%INSTANCE%.files/carriers hochladen oder auswählen."
-          },
-          "objectID": "parcelnet.%INSTANCE%.files",
-          "upload": "carriers",
-          "refresh": true,
-          "delete": true,
-          "withFolder": true,
-          "fileTypes": "image",
-          "maxSize": 2000000
+            "en": "Select or upload an image directly in the adapter file area under parcelnet.%INSTANCE%.files/carriers.",
+            "de": "Bild direkt im Adapter-Dateibereich unter parcelnet.%INSTANCE%.files/carriers auswählen oder hochladen."
+          }
         },
         "carrierLogo_hermes": {
-          "type": "fileSelector",
+          "type": "file",
           "label": {
             "en": "Hermes logo",
             "de": "Hermes-Logo"
@@ -207,21 +214,28 @@
           "sm": 12,
           "md": 6,
           "lg": 4,
-          "pattern": "carriers/*.*",
+          "limitPath": "parcelnet.%INSTANCE%.files/carriers",
+          "filterFiles": [
+            "png",
+            "svg",
+            "jpg",
+            "jpeg",
+            "gif",
+            "webp"
+          ],
+          "allowUpload": true,
+          "allowDownload": true,
+          "allowCreateFolder": false,
+          "allowView": true,
+          "showToolbar": true,
+          "trim": true,
           "help": {
-            "en": "Upload or select an image in the adapter file area parcelnet.%INSTANCE%.files/carriers.",
-            "de": "Bild direkt im Adapter-Dateibereich parcelnet.%INSTANCE%.files/carriers hochladen oder auswählen."
-          },
-          "objectID": "parcelnet.%INSTANCE%.files",
-          "upload": "carriers",
-          "refresh": true,
-          "delete": true,
-          "withFolder": true,
-          "fileTypes": "image",
-          "maxSize": 2000000
+            "en": "Select or upload an image directly in the adapter file area under parcelnet.%INSTANCE%.files/carriers.",
+            "de": "Bild direkt im Adapter-Dateibereich unter parcelnet.%INSTANCE%.files/carriers auswählen oder hochladen."
+          }
         },
         "carrierLogo_dpd": {
-          "type": "fileSelector",
+          "type": "file",
           "label": {
             "en": "DPD logo",
             "de": "DPD-Logo"
@@ -229,21 +243,28 @@
           "sm": 12,
           "md": 6,
           "lg": 4,
-          "pattern": "carriers/*.*",
+          "limitPath": "parcelnet.%INSTANCE%.files/carriers",
+          "filterFiles": [
+            "png",
+            "svg",
+            "jpg",
+            "jpeg",
+            "gif",
+            "webp"
+          ],
+          "allowUpload": true,
+          "allowDownload": true,
+          "allowCreateFolder": false,
+          "allowView": true,
+          "showToolbar": true,
+          "trim": true,
           "help": {
-            "en": "Upload or select an image in the adapter file area parcelnet.%INSTANCE%.files/carriers.",
-            "de": "Bild direkt im Adapter-Dateibereich parcelnet.%INSTANCE%.files/carriers hochladen oder auswählen."
-          },
-          "objectID": "parcelnet.%INSTANCE%.files",
-          "upload": "carriers",
-          "refresh": true,
-          "delete": true,
-          "withFolder": true,
-          "fileTypes": "image",
-          "maxSize": 2000000
+            "en": "Select or upload an image directly in the adapter file area under parcelnet.%INSTANCE%.files/carriers.",
+            "de": "Bild direkt im Adapter-Dateibereich unter parcelnet.%INSTANCE%.files/carriers auswählen oder hochladen."
+          }
         },
         "carrierLogo_ups": {
-          "type": "fileSelector",
+          "type": "file",
           "label": {
             "en": "UPS logo",
             "de": "UPS-Logo"
@@ -251,21 +272,28 @@
           "sm": 12,
           "md": 6,
           "lg": 4,
-          "pattern": "carriers/*.*",
+          "limitPath": "parcelnet.%INSTANCE%.files/carriers",
+          "filterFiles": [
+            "png",
+            "svg",
+            "jpg",
+            "jpeg",
+            "gif",
+            "webp"
+          ],
+          "allowUpload": true,
+          "allowDownload": true,
+          "allowCreateFolder": false,
+          "allowView": true,
+          "showToolbar": true,
+          "trim": true,
           "help": {
-            "en": "Upload or select an image in the adapter file area parcelnet.%INSTANCE%.files/carriers.",
-            "de": "Bild direkt im Adapter-Dateibereich parcelnet.%INSTANCE%.files/carriers hochladen oder auswählen."
-          },
-          "objectID": "parcelnet.%INSTANCE%.files",
-          "upload": "carriers",
-          "refresh": true,
-          "delete": true,
-          "withFolder": true,
-          "fileTypes": "image",
-          "maxSize": 2000000
+            "en": "Select or upload an image directly in the adapter file area under parcelnet.%INSTANCE%.files/carriers.",
+            "de": "Bild direkt im Adapter-Dateibereich unter parcelnet.%INSTANCE%.files/carriers auswählen oder hochladen."
+          }
         },
         "carrierLogo_amazon": {
-          "type": "fileSelector",
+          "type": "file",
           "label": {
             "en": "Amazon logo",
             "de": "Amazon-Logo"
@@ -273,21 +301,28 @@
           "sm": 12,
           "md": 6,
           "lg": 4,
-          "pattern": "carriers/*.*",
+          "limitPath": "parcelnet.%INSTANCE%.files/carriers",
+          "filterFiles": [
+            "png",
+            "svg",
+            "jpg",
+            "jpeg",
+            "gif",
+            "webp"
+          ],
+          "allowUpload": true,
+          "allowDownload": true,
+          "allowCreateFolder": false,
+          "allowView": true,
+          "showToolbar": true,
+          "trim": true,
           "help": {
-            "en": "Upload or select an image in the adapter file area parcelnet.%INSTANCE%.files/carriers.",
-            "de": "Bild direkt im Adapter-Dateibereich parcelnet.%INSTANCE%.files/carriers hochladen oder auswählen."
-          },
-          "objectID": "parcelnet.%INSTANCE%.files",
-          "upload": "carriers",
-          "refresh": true,
-          "delete": true,
-          "withFolder": true,
-          "fileTypes": "image",
-          "maxSize": 2000000
+            "en": "Select or upload an image directly in the adapter file area under parcelnet.%INSTANCE%.files/carriers.",
+            "de": "Bild direkt im Adapter-Dateibereich unter parcelnet.%INSTANCE%.files/carriers auswählen oder hochladen."
+          }
         },
         "carrierLogo_gls": {
-          "type": "fileSelector",
+          "type": "file",
           "label": {
             "en": "GLS logo",
             "de": "GLS-Logo"
@@ -295,21 +330,28 @@
           "sm": 12,
           "md": 6,
           "lg": 4,
-          "pattern": "carriers/*.*",
+          "limitPath": "parcelnet.%INSTANCE%.files/carriers",
+          "filterFiles": [
+            "png",
+            "svg",
+            "jpg",
+            "jpeg",
+            "gif",
+            "webp"
+          ],
+          "allowUpload": true,
+          "allowDownload": true,
+          "allowCreateFolder": false,
+          "allowView": true,
+          "showToolbar": true,
+          "trim": true,
           "help": {
-            "en": "Upload or select an image in the adapter file area parcelnet.%INSTANCE%.files/carriers.",
-            "de": "Bild direkt im Adapter-Dateibereich parcelnet.%INSTANCE%.files/carriers hochladen oder auswählen."
-          },
-          "objectID": "parcelnet.%INSTANCE%.files",
-          "upload": "carriers",
-          "refresh": true,
-          "delete": true,
-          "withFolder": true,
-          "fileTypes": "image",
-          "maxSize": 2000000
+            "en": "Select or upload an image directly in the adapter file area under parcelnet.%INSTANCE%.files/carriers.",
+            "de": "Bild direkt im Adapter-Dateibereich unter parcelnet.%INSTANCE%.files/carriers auswählen oder hochladen."
+          }
         },
         "carrierLogo_deutschepost": {
-          "type": "fileSelector",
+          "type": "file",
           "label": {
             "en": "Deutsche Post logo",
             "de": "Deutsche-Post-Logo"
@@ -317,21 +359,28 @@
           "sm": 12,
           "md": 6,
           "lg": 4,
-          "pattern": "carriers/*.*",
+          "limitPath": "parcelnet.%INSTANCE%.files/carriers",
+          "filterFiles": [
+            "png",
+            "svg",
+            "jpg",
+            "jpeg",
+            "gif",
+            "webp"
+          ],
+          "allowUpload": true,
+          "allowDownload": true,
+          "allowCreateFolder": false,
+          "allowView": true,
+          "showToolbar": true,
+          "trim": true,
           "help": {
-            "en": "Upload or select an image in the adapter file area parcelnet.%INSTANCE%.files/carriers.",
-            "de": "Bild direkt im Adapter-Dateibereich parcelnet.%INSTANCE%.files/carriers hochladen oder auswählen."
-          },
-          "objectID": "parcelnet.%INSTANCE%.files",
-          "upload": "carriers",
-          "refresh": true,
-          "delete": true,
-          "withFolder": true,
-          "fileTypes": "image",
-          "maxSize": 2000000
+            "en": "Select or upload an image directly in the adapter file area under parcelnet.%INSTANCE%.files/carriers.",
+            "de": "Bild direkt im Adapter-Dateibereich unter parcelnet.%INSTANCE%.files/carriers auswählen oder hochladen."
+          }
         },
         "carrierLogo_fedex": {
-          "type": "fileSelector",
+          "type": "file",
           "label": {
             "en": "FedEx logo",
             "de": "FedEx-Logo"
@@ -339,18 +388,25 @@
           "sm": 12,
           "md": 6,
           "lg": 4,
-          "pattern": "carriers/*.*",
+          "limitPath": "parcelnet.%INSTANCE%.files/carriers",
+          "filterFiles": [
+            "png",
+            "svg",
+            "jpg",
+            "jpeg",
+            "gif",
+            "webp"
+          ],
+          "allowUpload": true,
+          "allowDownload": true,
+          "allowCreateFolder": false,
+          "allowView": true,
+          "showToolbar": true,
+          "trim": true,
           "help": {
-            "en": "Upload or select an image in the adapter file area parcelnet.%INSTANCE%.files/carriers.",
-            "de": "Bild direkt im Adapter-Dateibereich parcelnet.%INSTANCE%.files/carriers hochladen oder auswählen."
-          },
-          "objectID": "parcelnet.%INSTANCE%.files",
-          "upload": "carriers",
-          "refresh": true,
-          "delete": true,
-          "withFolder": true,
-          "fileTypes": "image",
-          "maxSize": 2000000
+            "en": "Select or upload an image directly in the adapter file area under parcelnet.%INSTANCE%.files/carriers.",
+            "de": "Bild direkt im Adapter-Dateibereich unter parcelnet.%INSTANCE%.files/carriers auswählen oder hochladen."
+          }
         }
       }
     }
