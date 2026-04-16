@@ -179,3 +179,7 @@ Das vermeidet Probleme mit Berechtigungen, Pfaden und der Auswahl in der Admin-U
 
 ## 0.6.3-hotfix19
 - Fix: Legacy-Objekt `parcelnet.0.files` wird beim Start rekursiv entfernt.
+
+
+## 0.6.3-hotfix20
+- Mobile/Compact-HTML optimiert: kleineres Logo, kleineres Badge, engeres Padding und saubererer Titelumbruch auf dem Handy.
