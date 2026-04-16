@@ -1,7 +1,7 @@
 {
   "common": {
     "name": "parcelnet",
-    "version": "0.7.0-beta.18",
+    "version": "0.7.0-beta.19",
     "news": {
       "0.5.0": {
         "en": "Initial TypeScript adapter version with Parcel API polling, item states, manual refresh and VIS HTML output.",
@@ -58,6 +58,10 @@
       "0.7.0-beta.18": {
         "en": "Restored normalized logo lookup so UI-configured Deutsche Post logo is used for dp.",
         "de": "Normalisierter Logo-Lookup wiederhergestellt, damit bei dp das in der UI gepflegte Deutsche-Post-Logo verwendet wird."
+      },
+      "0.7.0-beta.19": {
+        "en": "Fixed missing normalizeCarrierKey method in runtime build.",
+        "de": "Fehlende Methode normalizeCarrierKey im Runtime-Build behoben."
       }
     },
     "titleLang": {

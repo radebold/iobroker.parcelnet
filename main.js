@@ -616,6 +616,42 @@ class ParcelNet extends utils.Adapter {
         await this.setStateAsync("vis.htmlCompact", { val: compact, ack: true });
     }
 
+
+    normalizeCarrierKey(value) {
+        const raw = String(value || "").toLowerCase().trim();
+        if (!raw) {
+            return "";
+        }
+        if (CARRIER_ALIASES[raw]) {
+            return CARRIER_ALIASES[raw];
+        }
+        if (raw.includes("amazon") || raw.startsWith("amz")) {
+            return "amazon";
+        }
+        if (raw.includes("dhl")) {
+            return "dhl";
+        }
+        if (raw === "dp" || raw.includes("deutsche") || raw.includes("post")) {
+            return "deutschepost";
+        }
+        if (raw.includes("dpd")) {
+            return "dpd";
+        }
+        if (raw.includes("hermes")) {
+            return "hermes";
+        }
+        if (raw.includes("ups")) {
+            return "ups";
+        }
+        if (raw.includes("gls")) {
+            return "gls";
+        }
+        if (raw.includes("fedex")) {
+            return "fedex";
+        }
+        return raw;
+    }
+
     getCarrierMeta(delivery) {
         const candidates = [
             delivery?.carrier_code,
