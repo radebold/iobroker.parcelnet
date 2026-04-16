@@ -1,7 +1,7 @@
 {
   "common": {
     "name": "parcelnet",
-    "version": "0.7.0-beta.11",
+    "version": "0.7.0-beta.12",
     "news": {
       "0.5.0": {
         "en": "Initial TypeScript adapter version with Parcel API polling, item states, manual refresh and VIS HTML output.",
@@ -30,6 +30,10 @@
       "0.7.0-beta.11": {
         "en": "Restored carrier icons and removed status code number from badge.",
         "de": "Carrier-Icons wiederhergestellt und Statuszahl aus dem Badge entfernt."
+      },
+      "0.7.0-beta.12": {
+        "en": "Fixed JS syntax regression in carrier icon patch.",
+        "de": "JS-Syntaxfehler im Carrier-Icon-Patch behoben."
       }
     },
     "titleLang": {

@@ -616,7 +616,7 @@ class ParcelNet extends utils.Adapter {
         await this.setStateAsync("vis.htmlCompact", { val: compact, ack: true });
     }
 
-    private getCarrierMeta(delivery) {
+    getCarrierMeta(delivery) {
         const code = String(delivery?.carrier_code || "").toLowerCase().trim();
         if (["amzlde", "amzl", "amazonde", "amazon", "amazon-logistics"].includes(code)) return { key: "amazon", name: "Amazon" };
         if (code.includes("dhl")) return { key: "dhl", name: "DHL" };
@@ -629,9 +629,9 @@ class ParcelNet extends utils.Adapter {
         return { key: code || "parcel", name: code || "Parcel" };
     }
 
-    private getCarrierIcon(delivery): string {
+    getCarrierIcon(delivery) {
         const carrier = this.getCarrierMeta(delivery);
-        const configured = String((this.config)?.[`carrierLogo_${carrier.key}`] || "").trim();
+        const configured = String(this.config?.[`carrierLogo_${carrier.key}`] || "").trim();
         if (configured) return configured;
         return `/adapter/parcelnet/carriers/${carrier.key}.svg`;
     }
