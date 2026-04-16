@@ -1,7 +1,7 @@
 {
   "common": {
     "name": "parcelnet",
-    "version": "0.7.0-beta.17",
+    "version": "0.7.0-beta.18",
     "news": {
       "0.5.0": {
         "en": "Initial TypeScript adapter version with Parcel API polling, item states, manual refresh and VIS HTML output.",
@@ -54,6 +54,10 @@
       "0.7.0-beta.17": {
         "en": "Updated adapter icon to the provided ParcelNet marker icon.",
         "de": "Adapter-Icon auf das bereitgestellte ParcelNet-Marker-Icon aktualisiert."
+      },
+      "0.7.0-beta.18": {
+        "en": "Restored normalized logo lookup so UI-configured Deutsche Post logo is used for dp.",
+        "de": "Normalisierter Logo-Lookup wiederhergestellt, damit bei dp das in der UI gepflegte Deutsche-Post-Logo verwendet wird."
       }
     },
     "titleLang": {

@@ -617,26 +617,58 @@ class ParcelNet extends utils.Adapter {
     }
 
     getCarrierMeta(delivery) {
-        const code = String(delivery?.carrier_code || "").toLowerCase().trim();
-        if (["amzlde", "amzl", "amazonde", "amazon", "amazon-logistics"].includes(code)) return { key: "amazon", name: "Amazon" };
-        if (code.includes("dhl")) return { key: "dhl", name: "DHL" };
-        if (code.includes("hermes")) return { key: "hermes", name: "Hermes" };
-        if (code.includes("dpd")) return { key: "dpd", name: "DPD" };
-        if (code.includes("ups")) return { key: "ups", name: "UPS" };
-        if (code.includes("gls")) return { key: "gls", name: "GLS" };
-        if (code.includes("fedex")) return { key: "fedex", name: "FedEx" };
-        if (code.includes("post")) return { key: "deutschepost", name: "Deutsche Post" };
-        return { key: code || "parcel", name: code || "Parcel" };
+        const candidates = [
+            delivery?.carrier_code,
+            delivery?.carrier,
+            delivery?.provider,
+            delivery?.carrier_name,
+            delivery?.tracking?.carrier,
+        ];
+        for (const candidate of candidates) {
+            const key = this.normalizeCarrierKey(candidate);
+            if (key && CARRIER_META[key]) {
+                return CARRIER_META[key];
+            }
+        }
+        return CARRIER_META.parcel;
+    }
+
+    normalizeLogoPath(value) {
+        const input = String(value || "").trim();
+        if (!input) {
+            return "";
+        }
+        if (input.startsWith("http://") || input.startsWith("https://") || input.startsWith("/")) {
+            return input;
+        }
+        if (input.startsWith("main/")) {
+            return `/vis.0/${input}`;
+        }
+        if (input.startsWith("vis.0/")) {
+            return `/${input}`;
+        }
+        if (input.startsWith("vis.0:")) {
+            return `/${input.replace(":", "/")}`;
+        }
+        if (!input.startsWith("/") && !/^https?:/i.test(input) && !input.startsWith("data:")) {
+            return `/${this.namespace}.files/${input.replace(/^\/+/, "")}`;
+        }
+        return input;
     }
 
     getCarrierIcon(delivery) {
         const carrier = this.getCarrierMeta(delivery);
-        const configured = String(this.config?.[`carrierLogo_${carrier.key}`] || "").trim();
-        if (configured) return configured;
-        return `/adapter/parcelnet/carriers/${carrier.key}.svg`;
+        const configKey = `carrierLogo_${carrier.key}`;
+        const custom = this.normalizeLogoPath(this.config?.[configKey]);
+        if (custom) {
+            return custom;
+        }
+        const fallback = this.normalizeLogoPath(this.config?.carrierLogo_parcel);
+        if (fallback) {
+            return fallback;
+        }
+        return carrier.icon || CARRIER_META.parcel.icon;
     }
-
-
 
     getCarrierTileStyle(carrierKey, compact) {
         switch (carrierKey) {

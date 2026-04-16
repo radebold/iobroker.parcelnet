@@ -788,7 +788,6 @@ class ParcelNet extends utils.Adapter {
         return carrier.icon || CARRIER_META.parcel.icon;
     }
 
-    
     private getCarrierTileStyle(carrierKey: string, compact: boolean): { bg: string; border: string; imgFilter: string } {
         switch (carrierKey) {
             case "dp":

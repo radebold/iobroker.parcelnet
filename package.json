@@ -1,6 +1,6 @@
 {
   "name": "iobroker.parcelnet",
-  "version": "0.7.0-beta.17",
+  "version": "0.7.0-beta.18",
   "description": "ioBroker adapter for Parcel App deliveries",
   "author": {
     "name": "Thomas Radebold",
