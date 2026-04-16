@@ -161,3 +161,7 @@ Das vermeidet Probleme mit Berechtigungen, Pfaden und der Auswahl in der Admin-U
 
 ## 0.6.3-hotfix15
 - Fix: `getDisplayStatus is not a function`
+
+
+## 0.6.3-hotfix16
+- VIS: helle Logo-Kachel für bessere Lesbarkeit dunkler Carrier-Logos wie Amazon.

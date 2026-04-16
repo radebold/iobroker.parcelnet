@@ -904,8 +904,8 @@ class ParcelNet extends utils.Adapter {
                 return `
 <div style="padding:${cardPadding};border-radius:16px;background:rgba(15,23,42,.72);color:#fff;border:1px solid rgba(148,163,184,.20);">
   <div style="display:grid;grid-template-columns:${iconSize}px minmax(0,1fr) auto;gap:${gap};align-items:start;">
-    <div style="width:${iconSize}px;height:${iconSize}px;display:flex;align-items:center;justify-content:center;overflow:hidden;">
-      <img src="${this.escapeHtml(icon)}" alt="${this.escapeHtml(carrier.name)}" style="max-width:100%;max-height:100%;object-fit:contain;display:block;background:transparent;"/>
+    <div style="width:${iconSize}px;height:${iconSize}px;display:flex;align-items:center;justify-content:center;overflow:hidden;background:rgba(255,255,255,.96);border-radius:14px;padding:6px;box-shadow:0 1px 4px rgba(0,0,0,.18);">
+      <img src="${this.escapeHtml(icon)}" alt="${this.escapeHtml(carrier.name)}" style="max-width:100%;max-height:100%;object-fit:contain;display:block;background:transparent;filter:drop-shadow(0 1px 1px rgba(255,255,255,.35));"/>
     </div>
     <div style="min-width:0;">
       <div style="font-size:${titleSize};font-weight:700;line-height:1.2;white-space:normal;word-break:break-word;">${this.escapeHtml(String(delivery.description || "Unbenannte Lieferung"))}</div>
