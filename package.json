@@ -3,7 +3,8 @@
   "version": "0.7.0-beta.3",
   "description": "Parcel App adapter for ioBroker with states and VIS HTML output",
   "author": {
-    "name": "Thomas Radebold / OpenAI"
+    "name": "Thomas Radebold",
+    "email": ""
   },
   "homepage": "https://github.com/radebold/ioBroker.parcelnet",
   "license": "MIT",
@@ -18,6 +19,9 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/radebold/ioBroker.parcelnet.git"
+  },
+  "bugs": {
+    "url": "https://github.com/radebold/ioBroker.parcelnet/issues"
   },
   "engines": {
     "node": ">=18"
@@ -35,9 +39,11 @@
   ],
   "scripts": {
     "build": "tsc -p tsconfig.json",
-    "clean": "node -e \"require('fs').rmSync('build', { recursive: true, force: true });\"",
     "prepare": "npm run build",
-    "test": "npm run check:js && npm run check:json"
+    "check:js": "node --check main.js",
+    "check:json": "node -e \"JSON.parse(require('fs').readFileSync('io-package.json','utf8')); JSON.parse(require('fs').readFileSync('admin/jsonConfig.json','utf8')); console.log('json ok')\"",
+    "test": "npm run check:js && npm run check:json",
+    "pack": "npm pack"
   },
   "dependencies": {
     "@iobroker/adapter-core": "^3.3.2"
@@ -47,8 +53,5 @@
     "@iobroker/types": "^7.0.6",
     "@types/node": "^22.15.3",
     "typescript": "^5.8.3"
-  },
-  "bugs": {
-    "url": "https://github.com/radebold/ioBroker.parcelnet/issues"
   }
 }
