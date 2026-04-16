@@ -183,3 +183,7 @@ Das vermeidet Probleme mit Berechtigungen, Pfaden und der Auswahl in der Admin-U
 
 ## 0.6.3-hotfix20
 - Mobile/Compact-HTML optimiert: kleineres Logo, kleineres Badge, engeres Padding und saubererer Titelumbruch auf dem Handy.
+
+
+## 0.6.3-hotfix21
+- Mobile/Compact: Textstart einige Pixel nach rechts verschoben, damit Titel nicht mehr am Logo klebt.

@@ -895,7 +895,7 @@ class ParcelNet extends utils.Adapter {
         const metaSize = compact ? "11px" : "13px";
         const textSize = compact ? "11px" : "13px";
         const iconSize = compact ? 40 : 56;
-        const gap = compact ? "6px" : "10px";
+        const gap = compact ? "8px" : "10px";
         const rows = items.length === 0
             ? `<div style="padding:${cardPadding};border-radius:14px;border:1px solid rgba(148,163,184,.25);color:#e5e7eb;background:rgba(15,23,42,.18);">Keine Lieferungen vorhanden</div>`
             : items.map((delivery) => {
@@ -912,7 +912,7 @@ class ParcelNet extends utils.Adapter {
     <div style="width:${iconSize}px;height:${iconSize}px;display:flex;align-items:center;justify-content:center;overflow:hidden;background:rgba(255,255,255,.96);border-radius:${compact ? "12px" : "14px"};padding:${compact ? "4px" : "6px"};box-shadow:0 1px 4px rgba(0,0,0,.18);">
       <img src="${this.escapeHtml(icon)}" alt="${this.escapeHtml(carrier.name)}" style="max-width:100%;max-height:100%;object-fit:contain;display:block;background:transparent;filter:drop-shadow(0 1px 1px rgba(255,255,255,.35));"/>
     </div>
-    <div style="min-width:0;">
+    <div style="min-width:0;padding-left:${compact ? "4px" : "0"};">
       <div style="font-size:${titleSize};font-weight:700;line-height:${compact ? "1.1" : "1.2"};white-space:normal;word-break:break-word;padding-right:${compact ? "4px" : "0"};">${this.escapeHtml(String(delivery.description || "Unbenannte Lieferung"))}</div>
       <div style="margin-top:2px;font-size:${metaSize};opacity:.88;">${this.escapeHtml(carrier.name)}</div>
       ${expected ? `<div style="margin-top:8px;font-size:${textSize};line-height:1.35;"><span style="opacity:.75;">Geplante Lieferung:</span> <b>${this.escapeHtml(expected)}</b></div>` : ""}
