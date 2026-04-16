@@ -1,7 +1,7 @@
 {
   "common": {
     "name": "parcelnet",
-    "version": "0.6.3-hotfix8",
+    "version": "0.6.3-hotfix9",
     "news": {
       "0.5.0": {
         "en": "Initial TypeScript adapter version with Parcel API polling, item states, manual refresh and VIS HTML output.",
@@ -125,5 +125,5 @@
       "native": {}
     }
   ],
-  "version": "0.6.3-hotfix8"
+  "version": "0.6.3-hotfix9"
 }

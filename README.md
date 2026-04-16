@@ -1,3 +1,8 @@
+## 0.6.3-hotfix9
+
+- Fix: Adapter startete nicht mehr, weil `ensureFileMetaObject()` fehlte.
+- Datei-Metaobjekt `parcelnet.0.files` wird jetzt sauber angelegt.
+
 # ioBroker.parcelnet
 
 Ein schlanker ioBroker-Adapter in **TypeScript** für die Parcel-App-API.
