@@ -143,3 +143,10 @@ Die Carrier-Logos werden jetzt direkt in den eigenen Dateibereich des Adapters h
 - nicht mehr: `vis.0/main/img/parcelnet`
 
 Das vermeidet Probleme mit Berechtigungen, Pfaden und der Auswahl in der Admin-UI.
+
+
+## 0.6.3-hotfix12
+
+- GUI crash in the carrier logo tab removed
+- direct upload fields replaced by stable text inputs for local paths, adapter paths, VIS paths or HTTPS URLs
+- built-in fallback icons remain available when fields are empty

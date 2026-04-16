@@ -1,47 +1,12 @@
 {
   "common": {
     "name": "parcelnet",
-    "version": "0.6.3-hotfix11",
+    "version": "0.6.3-hotfix12",
     "news": {
-      "0.5.0": {
-        "en": "Initial TypeScript adapter version with Parcel API polling, item states, manual refresh and VIS HTML output.",
-        "de": "Erste TypeScript-Adapterversion mit Parcel-API-Polling, Einzelzuständen, manuellem Refresh und VIS-HTML-Ausgabe."
-      },
-      "0.5.5": {
-        "en": "Updated adapter icon with a custom ParcelNet logo variant.",
-        "de": "Adapter-Icon mit einer angepassten ParcelNet-Logo-Variante aktualisiert."
-      },
-      "0.5.6": {
-        "en": "Removed the startup wrapper and embedded the runtime directly into main.js so the adapter starts reliably from ZIP installations.",
-        "de": "Start-Wrapper entfernt und die Laufzeit direkt in main.js eingebettet, damit der Adapter aus ZIP-Installationen zuverlässig startet."
-      },
-      "0.6.0": {
-        "en": "Added local carrier badge icons and new JSON states for VIS json widgets, including allProviderJson and inDelivery.",
-        "de": "Lokale Carrier-Badge-Icons und neue JSON-States für VIS-json-Widgets hinzugefügt, inklusive allProviderJson und inDelivery."
-      },
-      "0.6.1": {
-        "en": "Removed stylized carrier icons and kept Parcel-style VIS JSON states.",
-        "de": "Stilisierte Carrier-Icons entfernt und Parcel-artige VIS-JSON-States beibehalten.",
-        "ru": "Стилизованные иконки перевозчиков удалены, JSON-состояния для VIS сохранены в стиле Parcel.",
-        "pt": "Ícones estilizados das transportadoras removidos e mantidos os estados JSON do VIS em estilo Parcel.",
-        "nl": "Gestileerde vervoerder-iconen verwijderd en Parcel-achtige VIS-JSON-states behouden.",
-        "fr": "Icônes stylisées des transporteurs supprimées et états JSON VIS conservés dans le style Parcel.",
-        "it": "Rimosse le icone stilizzate dei corrieri e mantenuti gli stati JSON VIS in stile Parcel.",
-        "es": "Se eliminaron los iconos estilizados de transportistas y se mantuvieron los estados JSON VIS al estilo Parcel.",
-        "pl": "Usunięto stylizowane ikony przewoźników i pozostawiono stany JSON VIS w stylu Parcel.",
-        "uk": "Видалено стилізовані значки перевізників, а JSON-стани VIS залишено у стилі Parcel.",
-        "zh-cn": "已移除风格化承运商图标，并保留 Parcel 风格的 VIS JSON 状态。"
-      },
-      "0.6.3": {
-        "en": "VIS layout optimized, transparent background, optional demo mode when API is empty, and configurable carrier logos via admin file selection.",
-        "de": "VIS-Layout optimiert, transparenter Hintergrund, optionaler Demo-Modus bei leerer API und konfigurierbare Carrier-Logos per Admin-Dateiauswahl."
-      },
-      "0.6.3-hotfix7": {
-        "en": "Upload carrier logos into the adapter file area instead of vis.0 to avoid permission/path issues.",
-        "de": "Carrier-Logos werden jetzt in den eigenen Adapter-Dateibereich statt nach vis.0 hochgeladen, um Berechtigungs-/Pfadprobleme zu vermeiden."
-      },
-      "de": "Hotfix 8: Upload-Felder für Carrier-Logos in der Admin-UI auf korrektes fileSelector/objectID/upload-Schema umgestellt.",
-      "en": "Hotfix 8: Carrier logo upload fields in admin UI switched to the correct fileSelector/objectID/upload scheme."
+      "0.6.3-hotfix12": {
+        "en": "GUI hotfix: removed crashing file upload fields and replaced them with stable path/URL inputs for carrier logos.",
+        "de": "GUI-Hotfix: abstürzende Datei-Upload-Felder entfernt und durch stabile Pfad-/URL-Felder für Carrier-Logos ersetzt."
+      }
     },
     "titleLang": {
       "en": "ParcelNet",
@@ -108,7 +73,7 @@
     "carrierLogo_deutschepost": "",
     "carrierLogo_fedex": "",
     "carrierLogo_parcel": "",
-    "_uiHotfix": "file-default-empty-string"
+    "_uiHotfix": "carrier-logo-text-inputs"
   },
   "objects": [],
   "instanceObjects": [

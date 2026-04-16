@@ -130,8 +130,8 @@
         "logoInfo": {
           "type": "staticText",
           "text": {
-            "en": "Upload the logo files directly in this tab. The files are stored in the adapter file area parcelnet.%INSTANCE%.files/carriers. After upload, refresh the dropdown if needed and select the file.",
-            "de": "Lade die Logo-Dateien direkt in diesem Reiter hoch. Die Dateien werden im Adapter-Dateibereich parcelnet.%INSTANCE%.files/carriers gespeichert. Nach dem Upload bei Bedarf das Auswahlfeld aktualisieren und die Datei auswählen."
+            "en": "The direct upload field is disabled in this hotfix because it crashes in some Admin versions. Please upload files via the ioBroker file manager and paste the resulting path here, for example /adapter/parcelnet/carriers/dhl.svg or /vis.0/main/img/dhl.png.",
+            "de": "Das direkte Upload-Feld ist in diesem Hotfix deaktiviert, weil es in manchen Admin-Versionen abstürzt. Bitte Dateien über den ioBroker-Dateimanager hochladen und den resultierenden Pfad hier eintragen, z. B. /adapter/parcelnet/carriers/dhl.svg oder /vis.0/main/img/dhl.png."
           },
           "sm": 12,
           "md": 12,
@@ -140,291 +140,165 @@
         "logoFolder": {
           "type": "staticText",
           "text": {
-            "en": "Upload target: parcelnet.%INSTANCE%.files/carriers",
-            "de": "Upload-Ziel: parcelnet.%INSTANCE%.files/carriers"
+            "en": "Supported paths: adapter file paths, VIS file paths or external HTTPS URLs.",
+            "de": "Unterstützte Pfade: Adapter-Dateipfade, VIS-Dateipfade oder externe HTTPS-URLs."
           },
           "sm": 12,
-          "md": 8,
-          "lg": 6
+          "md": 12,
+          "lg": 12
         },
         "carrierLogo_parcel": {
-          "type": "file",
+          "type": "text",
           "label": {
             "en": "Default / fallback logo",
             "de": "Standard-/Fallback-Logo"
           },
+          "help": {
+            "en": "Path or URL to the logo image. Leave empty to use the built-in fallback.",
+            "de": "Pfad oder URL zum Logobild. Leer lassen, um das eingebaute Fallback zu verwenden."
+          },
+          "placeholder": "/adapter/parcelnet/carriers/parcel.svg",
+          "default": "",
+          "trim": true,
           "sm": 12,
           "md": 6,
-          "lg": 4,
-          "limitPath": "parcelnet.%INSTANCE%.files/carriers",
-          "filterFiles": [
-            "png",
-            "svg",
-            "jpg",
-            "jpeg",
-            "gif",
-            "webp"
-          ],
-          "allowUpload": true,
-          "allowDownload": true,
-          "allowCreateFolder": false,
-          "allowView": true,
-          "showToolbar": true,
-          "trim": true,
-          "help": {
-            "en": "Select or upload an image directly in the adapter file area under parcelnet.%INSTANCE%.files/carriers.",
-            "de": "Bild direkt im Adapter-Dateibereich unter parcelnet.%INSTANCE%.files/carriers auswählen oder hochladen."
-          },
-          "default": "",
-          "placeholder": ""
+          "lg": 4
         },
         "carrierLogo_dhl": {
-          "type": "file",
+          "type": "text",
           "label": {
             "en": "DHL logo",
             "de": "DHL-Logo"
           },
+          "help": {
+            "en": "Path or URL to the logo image. Leave empty to use the built-in fallback.",
+            "de": "Pfad oder URL zum Logobild. Leer lassen, um das eingebaute Fallback zu verwenden."
+          },
+          "placeholder": "/adapter/parcelnet/carriers/dhl.svg",
+          "default": "",
+          "trim": true,
           "sm": 12,
           "md": 6,
-          "lg": 4,
-          "limitPath": "parcelnet.%INSTANCE%.files/carriers",
-          "filterFiles": [
-            "png",
-            "svg",
-            "jpg",
-            "jpeg",
-            "gif",
-            "webp"
-          ],
-          "allowUpload": true,
-          "allowDownload": true,
-          "allowCreateFolder": false,
-          "allowView": true,
-          "showToolbar": true,
-          "trim": true,
-          "help": {
-            "en": "Select or upload an image directly in the adapter file area under parcelnet.%INSTANCE%.files/carriers.",
-            "de": "Bild direkt im Adapter-Dateibereich unter parcelnet.%INSTANCE%.files/carriers auswählen oder hochladen."
-          },
-          "default": "",
-          "placeholder": ""
+          "lg": 4
         },
         "carrierLogo_hermes": {
-          "type": "file",
+          "type": "text",
           "label": {
             "en": "Hermes logo",
             "de": "Hermes-Logo"
           },
+          "help": {
+            "en": "Path or URL to the logo image. Leave empty to use the built-in fallback.",
+            "de": "Pfad oder URL zum Logobild. Leer lassen, um das eingebaute Fallback zu verwenden."
+          },
+          "placeholder": "/adapter/parcelnet/carriers/hermes.svg",
+          "default": "",
+          "trim": true,
           "sm": 12,
           "md": 6,
-          "lg": 4,
-          "limitPath": "parcelnet.%INSTANCE%.files/carriers",
-          "filterFiles": [
-            "png",
-            "svg",
-            "jpg",
-            "jpeg",
-            "gif",
-            "webp"
-          ],
-          "allowUpload": true,
-          "allowDownload": true,
-          "allowCreateFolder": false,
-          "allowView": true,
-          "showToolbar": true,
-          "trim": true,
-          "help": {
-            "en": "Select or upload an image directly in the adapter file area under parcelnet.%INSTANCE%.files/carriers.",
-            "de": "Bild direkt im Adapter-Dateibereich unter parcelnet.%INSTANCE%.files/carriers auswählen oder hochladen."
-          },
-          "default": "",
-          "placeholder": ""
+          "lg": 4
         },
         "carrierLogo_dpd": {
-          "type": "file",
+          "type": "text",
           "label": {
             "en": "DPD logo",
             "de": "DPD-Logo"
           },
+          "help": {
+            "en": "Path or URL to the logo image. Leave empty to use the built-in fallback.",
+            "de": "Pfad oder URL zum Logobild. Leer lassen, um das eingebaute Fallback zu verwenden."
+          },
+          "placeholder": "/adapter/parcelnet/carriers/dpd.svg",
+          "default": "",
+          "trim": true,
           "sm": 12,
           "md": 6,
-          "lg": 4,
-          "limitPath": "parcelnet.%INSTANCE%.files/carriers",
-          "filterFiles": [
-            "png",
-            "svg",
-            "jpg",
-            "jpeg",
-            "gif",
-            "webp"
-          ],
-          "allowUpload": true,
-          "allowDownload": true,
-          "allowCreateFolder": false,
-          "allowView": true,
-          "showToolbar": true,
-          "trim": true,
-          "help": {
-            "en": "Select or upload an image directly in the adapter file area under parcelnet.%INSTANCE%.files/carriers.",
-            "de": "Bild direkt im Adapter-Dateibereich unter parcelnet.%INSTANCE%.files/carriers auswählen oder hochladen."
-          },
-          "default": "",
-          "placeholder": ""
+          "lg": 4
         },
         "carrierLogo_ups": {
-          "type": "file",
+          "type": "text",
           "label": {
             "en": "UPS logo",
             "de": "UPS-Logo"
           },
+          "help": {
+            "en": "Path or URL to the logo image. Leave empty to use the built-in fallback.",
+            "de": "Pfad oder URL zum Logobild. Leer lassen, um das eingebaute Fallback zu verwenden."
+          },
+          "placeholder": "/adapter/parcelnet/carriers/ups.svg",
+          "default": "",
+          "trim": true,
           "sm": 12,
           "md": 6,
-          "lg": 4,
-          "limitPath": "parcelnet.%INSTANCE%.files/carriers",
-          "filterFiles": [
-            "png",
-            "svg",
-            "jpg",
-            "jpeg",
-            "gif",
-            "webp"
-          ],
-          "allowUpload": true,
-          "allowDownload": true,
-          "allowCreateFolder": false,
-          "allowView": true,
-          "showToolbar": true,
-          "trim": true,
-          "help": {
-            "en": "Select or upload an image directly in the adapter file area under parcelnet.%INSTANCE%.files/carriers.",
-            "de": "Bild direkt im Adapter-Dateibereich unter parcelnet.%INSTANCE%.files/carriers auswählen oder hochladen."
-          },
-          "default": "",
-          "placeholder": ""
+          "lg": 4
         },
         "carrierLogo_amazon": {
-          "type": "file",
+          "type": "text",
           "label": {
             "en": "Amazon logo",
             "de": "Amazon-Logo"
           },
+          "help": {
+            "en": "Path or URL to the logo image. Leave empty to use the built-in fallback.",
+            "de": "Pfad oder URL zum Logobild. Leer lassen, um das eingebaute Fallback zu verwenden."
+          },
+          "placeholder": "/adapter/parcelnet/carriers/amazon.svg",
+          "default": "",
+          "trim": true,
           "sm": 12,
           "md": 6,
-          "lg": 4,
-          "limitPath": "parcelnet.%INSTANCE%.files/carriers",
-          "filterFiles": [
-            "png",
-            "svg",
-            "jpg",
-            "jpeg",
-            "gif",
-            "webp"
-          ],
-          "allowUpload": true,
-          "allowDownload": true,
-          "allowCreateFolder": false,
-          "allowView": true,
-          "showToolbar": true,
-          "trim": true,
-          "help": {
-            "en": "Select or upload an image directly in the adapter file area under parcelnet.%INSTANCE%.files/carriers.",
-            "de": "Bild direkt im Adapter-Dateibereich unter parcelnet.%INSTANCE%.files/carriers auswählen oder hochladen."
-          },
-          "default": "",
-          "placeholder": ""
+          "lg": 4
         },
         "carrierLogo_gls": {
-          "type": "file",
+          "type": "text",
           "label": {
             "en": "GLS logo",
             "de": "GLS-Logo"
           },
+          "help": {
+            "en": "Path or URL to the logo image. Leave empty to use the built-in fallback.",
+            "de": "Pfad oder URL zum Logobild. Leer lassen, um das eingebaute Fallback zu verwenden."
+          },
+          "placeholder": "/adapter/parcelnet/carriers/gls.svg",
+          "default": "",
+          "trim": true,
           "sm": 12,
           "md": 6,
-          "lg": 4,
-          "limitPath": "parcelnet.%INSTANCE%.files/carriers",
-          "filterFiles": [
-            "png",
-            "svg",
-            "jpg",
-            "jpeg",
-            "gif",
-            "webp"
-          ],
-          "allowUpload": true,
-          "allowDownload": true,
-          "allowCreateFolder": false,
-          "allowView": true,
-          "showToolbar": true,
-          "trim": true,
-          "help": {
-            "en": "Select or upload an image directly in the adapter file area under parcelnet.%INSTANCE%.files/carriers.",
-            "de": "Bild direkt im Adapter-Dateibereich unter parcelnet.%INSTANCE%.files/carriers auswählen oder hochladen."
-          },
-          "default": "",
-          "placeholder": ""
+          "lg": 4
         },
         "carrierLogo_deutschepost": {
-          "type": "file",
+          "type": "text",
           "label": {
             "en": "Deutsche Post logo",
             "de": "Deutsche-Post-Logo"
           },
+          "help": {
+            "en": "Path or URL to the logo image. Leave empty to use the built-in fallback.",
+            "de": "Pfad oder URL zum Logobild. Leer lassen, um das eingebaute Fallback zu verwenden."
+          },
+          "placeholder": "/adapter/parcelnet/carriers/deutschepost.svg",
+          "default": "",
+          "trim": true,
           "sm": 12,
           "md": 6,
-          "lg": 4,
-          "limitPath": "parcelnet.%INSTANCE%.files/carriers",
-          "filterFiles": [
-            "png",
-            "svg",
-            "jpg",
-            "jpeg",
-            "gif",
-            "webp"
-          ],
-          "allowUpload": true,
-          "allowDownload": true,
-          "allowCreateFolder": false,
-          "allowView": true,
-          "showToolbar": true,
-          "trim": true,
-          "help": {
-            "en": "Select or upload an image directly in the adapter file area under parcelnet.%INSTANCE%.files/carriers.",
-            "de": "Bild direkt im Adapter-Dateibereich unter parcelnet.%INSTANCE%.files/carriers auswählen oder hochladen."
-          },
-          "default": "",
-          "placeholder": ""
+          "lg": 4
         },
         "carrierLogo_fedex": {
-          "type": "file",
+          "type": "text",
           "label": {
             "en": "FedEx logo",
             "de": "FedEx-Logo"
           },
+          "help": {
+            "en": "Path or URL to the logo image. Leave empty to use the built-in fallback.",
+            "de": "Pfad oder URL zum Logobild. Leer lassen, um das eingebaute Fallback zu verwenden."
+          },
+          "placeholder": "/adapter/parcelnet/carriers/fedex.svg",
+          "default": "",
+          "trim": true,
           "sm": 12,
           "md": 6,
-          "lg": 4,
-          "limitPath": "parcelnet.%INSTANCE%.files/carriers",
-          "filterFiles": [
-            "png",
-            "svg",
-            "jpg",
-            "jpeg",
-            "gif",
-            "webp"
-          ],
-          "allowUpload": true,
-          "allowDownload": true,
-          "allowCreateFolder": false,
-          "allowView": true,
-          "showToolbar": true,
-          "trim": true,
-          "help": {
-            "en": "Select or upload an image directly in the adapter file area under parcelnet.%INSTANCE%.files/carriers.",
-            "de": "Bild direkt im Adapter-Dateibereich unter parcelnet.%INSTANCE%.files/carriers auswählen oder hochladen."
-          },
-          "default": "",
-          "placeholder": ""
+          "lg": 4
         }
       }
     }
