@@ -1,9 +1,9 @@
 {
   "common": {
     "name": "parcelnet",
-    "version": "0.7.0-beta.21",
+    "version": "0.7.0",
     "news": {
-      "0.7.0-beta.21": {
+      "0.7.01": {
         "en": "Repository checker cleanup and metadata alignment for beta submission.",
         "de": "Bereinigung für den Repository-Checker und Angleichung der Metadaten für die Beta-Einreichung."
       }

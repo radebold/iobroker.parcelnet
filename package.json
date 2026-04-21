@@ -1,6 +1,6 @@
 {
   "name": "iobroker.parcelnet",
-  "version": "0.7.0-beta.21",
+  "version": "0.7.0",
   "description": "Parcel App adapter for ioBroker with states and VIS HTML output",
   "author": {
     "name": "Thomas Radebold",
