@@ -48,7 +48,7 @@
   "devDependencies": {
     "@iobroker/testing": "^5.2.2",
     "@iobroker/types": "^7.0.6",
-    "@types/node": "^22.15.3",
+    "@types/node": "^25.6.0",
     "typescript": "^5.8.3"
   },
   "bugs": {
