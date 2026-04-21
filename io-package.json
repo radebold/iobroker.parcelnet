@@ -1,11 +1,11 @@
 {
   "common": {
     "name": "parcelnet",
-    "version": "0.7.0-beta.20",
+    "version": "0.7.0-beta.21",
     "news": {
-      "0.7.0-beta.20": {
-        "en": "Checker cleanup: README cleaned, workflow added, admin dependency updated and metadata aligned.",
-        "de": "Checker-Bereinigung: README bereinigt, Workflow ergänzt, Admin-Abhängigkeit aktualisiert und Metadaten angeglichen."
+      "0.7.0-beta.21": {
+        "en": "Repository checker cleanup and metadata alignment for beta submission.",
+        "de": "Bereinigung für den Repository-Checker und Angleichung der Metadaten für die Beta-Einreichung."
       }
     },
     "titleLang": {
@@ -35,9 +35,10 @@
       "zh-cn": "从 Parcel App 读取活动或最近的包裹，并将其作为 ioBroker 状态和 VIS HTML 提供。"
     },
     "authors": [
-      "Thomas Radebold / OpenAI"
+      "Thomas Radebold"
     ],
     "keywords": [
+      "ioBroker",
       "parcel",
       "deliveries",
       "tracking",
@@ -50,7 +51,7 @@
     "readme": "https://github.com/radebold/ioBroker.parcelnet/blob/master/README.md",
     "loglevel": "info",
     "mode": "daemon",
-    "type": "misc-data",
+    "type": "communication",
     "compact": true,
     "connectionType": "cloud",
     "dataSource": "poll",

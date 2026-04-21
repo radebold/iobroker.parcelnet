@@ -1,7 +1,7 @@
 {
   "name": "iobroker.parcelnet",
-  "version": "0.7.0-beta.20",
-  "description": "ioBroker adapter for Parcel App deliveries",
+  "version": "0.7.0-beta.21",
+  "description": "Parcel App adapter for ioBroker with states and VIS HTML output",
   "author": {
     "name": "Thomas Radebold",
     "email": ""
@@ -13,7 +13,8 @@
     "iobroker-adapter",
     "parcel",
     "delivery",
-    "tracking"
+    "tracking",
+    "parcel.app"
   ],
   "repository": {
     "type": "git",

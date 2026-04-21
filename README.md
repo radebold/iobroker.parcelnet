@@ -45,11 +45,11 @@ Configure the adapter instance with:
 
 ## Changelog
 
-### 0.7.0-beta.20
-- checker cleanup for repository submission
+### 0.7.0-beta.21
+- repository checker cleanup
 - updated admin dependency requirement
-- cleaned README and aligned metadata
-- added standard test-and-release workflow
+- aligned package metadata
+- kept standard CI workflow
 
 ## License
 
